@@ -1,39 +1,299 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
-    </head>
-    <body>
-    <div id="content" role="main">
-        <div class="container">
-            <section class="row">
-                <a href="#show-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-                <div class="nav" role="navigation">
-                    <ul>
-                        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                        <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-                    </ul>
-                </div>
-            </section>
-            <section class="row">
-                <div id="show-user" class="col-12 content scaffold-show" role="main">
-                    <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-                    <g:if test="${flash.message}">
-                    <div class="message" role="status">${flash.message}</div>
-                    </g:if>
-                    <f:display bean="user" />
-                    <g:form resource="${this.user}" method="DELETE">
-                        <fieldset class="buttons">
-                            <g:link class="edit" action="edit" resource="${this.user}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                            <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                        </fieldset>
-                    </g:form>
-                </div>
-            </section>
-        </div>
+<head>
+    <meta name="layout" content="main"/>
+    <title>User</title>
+    <asset:stylesheet href="style.css"/>
+</head>
+<body>
+<content tag="breadcrumb">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="${createLink(uri: '/')}">Home</a></li>
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="/User">Users</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">${this.user.id}</li>
+        </ol>
+        <h6 class="font-weight-bolder mb-0">Users</h6>
+    </nav>
+</content>
+<div id="content" role="main">
+    <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+        <span class="mask  bg-gradient-primary  opacity-6"></span>
     </div>
-    </body>
+    <div class="card card-body mx-3 mx-md-4 mt-n6">
+        <div class="row gx-4 mb-2">
+            <div class="col-auto">
+                <div class="avatar avatar-xl position-relative">
+                    <asset:image src="img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm" />
+                </div>
+            </div>
+            <div class="col-auto my-auto">
+                <div class="h-100">
+                    <h5 class="mb-1">
+                        ${this.user.username}
+                    </h5>
+                    <p class="mb-1 font-weight-normal text-sm">
+                        3.5/5
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col-6 col-xl-4">
+                    <div class="card card-plain h-100">
+                        <div class="card-header pb-0 p-3">
+                            <h6 class="mb-0">Account Moderation</h6>
+                        </div>
+                        <div class="card-body p-3">
+                            <div>
+                                <a href="javascript:;" class="text-warning font-weight-bold text-sm" data-toggle="tooltip" data-original-title="Suspend user">
+                                    Suspend Account
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript:;" class="text-danger font-weight-bold text-sm" data-toggle="tooltip" data-original-title="Ban user">
+                                    Ban Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-4">
+                    <div class="card card-plain h-100">
+                        <div class="card-header pb-0 p-3">
+                            <div class="row">
+                                <div class="col-md-8 d-flex align-items-center">
+                                    <h6 class="mb-0">Profile Information</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <ul class="list-group">
+                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Reference:</strong> &nbsp; 012345</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Username:</strong> &nbsp; John Doe</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; johndoe@mail.com</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-4">
+                    <div class="card card-plain h-100">
+                        <div class="card-header pb-0 p-3">
+                            <h6 class="mb-0">Rating</h6>
+                            <p class="text-sm">
+                                <span class="font-weight-bold">Average:</span> &nbsp; 3/5
+                            </p>
+                            <p class="text-sm">
+                                <span class="font-weight-bold">Total votes:</span> &nbsp; 5
+                            </p>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">User</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Stars</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="text-xs ">User123</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-xs text-secondary ">3/5</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="text-xs ">User123</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-xs text-secondary ">3/5</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="text-xs ">User123</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-xs text-secondary ">3/5</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="text-xs ">User123</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-xs text-secondary ">3/5</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="card card-plain h-100">
+                        <div class="card-header pb-0 p-3">
+                            <h6 class="mb-0">Trade Proposals</h6>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ref</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Proposer</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Products</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Datetime</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                        <th class="text-secondary opacity-7"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="text-sm ">PO0125</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-xs ">User123</span>
+                                        </td>
+                                        <td class="align-middle text-xs">
+                                            <ul>
+                                                <li>Tapis souris</li>
+                                                <li>Dell XPS 13</li>
+                                            </ul>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span class="text-secondary text-xs">23/04/18 07:15AM</span>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-danger">Rejected</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="text-sm ">PO0125</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-xs ">User123</span>
+                                        </td>
+                                        <td class="align-middle text-xs">
+                                            <ul>
+                                                <li>Tapis souris</li>
+                                                <li>Dell XPS 13</li>
+                                            </ul>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span class="text-secondary text-xs">23/04/18 07:15AM</span>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-success">Accepted</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="text-sm ">PO0125</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-xs ">User123</span>
+                                        </td>
+                                        <td class="align-middle text-xs">
+                                            <ul>
+                                                <li>Tapis souris</li>
+                                                <li>Dell XPS 13</li>
+                                            </ul>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span class="text-secondary text-xs">23/04/18 07:15AM</span>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-warning">Pending transaction</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card card-plain h-100">
+                        <div class="card-header pb-0 p-3">
+                            <h6 class="mb-0">Transaction overview</h6>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="timeline timeline-one-side">
+                                <div class="timeline-block mb-3">
+                                    <span class="timeline-step">
+                                        <i class="material-icons text-success text-gradient">notifications</i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <h6 class="text-dark text-sm font-weight-bold mb-0">$2400, Design changes</h6>
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-block mb-3">
+                                    <span class="timeline-step">
+                                        <i class="material-icons text-danger text-gradient">code</i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <h6 class="text-dark text-sm font-weight-bold mb-0">New order #1832412</h6>
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 11 PM</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-block mb-3">
+                                    <span class="timeline-step">
+                                        <i class="material-icons text-info text-gradient">shopping_cart</i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <h6 class="text-dark text-sm font-weight-bold mb-0">Server payments for April</h6>
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 9:34 PM</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-block mb-3">
+                                    <span class="timeline-step">
+                                        <i class="material-icons text-warning text-gradient">credit_card</i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <h6 class="text-dark text-sm font-weight-bold mb-0">New card added for order #4395133</h6>
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">20 DEC 2:20 AM</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-block mb-3">
+                                    <span class="timeline-step">
+                                        <i class="material-icons text-primary text-gradient">key</i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <h6 class="text-dark text-sm font-weight-bold mb-0">Unlock packages for development</h6>
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">18 DEC 4:54 AM</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-block">
+                                    <span class="timeline-step">
+                                        <i class="material-icons text-dark text-gradient">payments</i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <h6 class="text-dark text-sm font-weight-bold mb-0">New order #9583120</h6>
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">17 DEC</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>
+</body>
 </html>

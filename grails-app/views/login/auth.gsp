@@ -1,149 +1,105 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
 <head>
-  <meta name="layout" content="${gspLayout ?: 'main'}"/>
-  <title><g:message code='springSecurity.login.title'/></title>
-  <style type="text/css" media="screen">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Troc App</title>
+  <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
+  <!--     Fonts and icons     -->
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 
-    body, html { background: red;}
+  <!-- Nucleo Icons -->
+  <asset:stylesheet href="nucleo-icons.css" rel="stylesheet" />
+  <asset:stylesheet href="nucleo-svg.css" rel="stylesheet" />
 
-  #login {
-    margin: 15px 0px;
-    padding: 0px;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
-  #login .inner {
-    width: 340px;
-    padding-bottom: 6px;
-    margin: 60px auto;
-    text-align: left;
-    border: 1px solid #aab;
-    background-color: #f0f0fa;
-    -moz-box-shadow: 2px 2px 2px #eee;
-    -webkit-box-shadow: 2px 2px 2px #eee;
-    -khtml-box-shadow: 2px 2px 2px #eee;
-    box-shadow: 2px 2px 2px #eee;
-  }
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
-  #login .inner .fheader {
-    padding: 18px 26px 14px 26px;
-    background-color: #f7f7ff;
-    margin: 0px 0 14px 0;
-    color: #2e3741;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  #login .inner .cssform p {
-    clear: left;
-    margin: 0;
-    padding: 4px 0 3px 0;
-    padding-left: 105px;
-    margin-bottom: 20px;
-    height: 1%;
-  }
-
-  #login .inner .cssform input[type="text"] {
-    width: 75%;
-  }
-
-  #login .inner .cssform label {
-    font-weight: bold;
-    float: left;
-    text-align: right;
-    margin-left: -105px;
-    width: 110px;
-    padding-top: 3px;
-    padding-right: 10px;
-  }
-
-  #remember_me_holder {
-    padding-left: 120px;
-  }
-
-  #submit {
-    margin-left: 15px;
-  }
-
-  #remember_me_holder label {
-    float: none;
-    margin-left: 0;
-    text-align: left;
-    width: 200px
-  }
-
-  #login .inner .login_message {
-    padding: 6px 25px 20px 25px;
-    color: #c33;
-  }
-
-  #login .inner .text_ {
-    width: 75%;
-  }
-
-  #login .inner .chk {
-    height: 12px;
-  }
-
-  #passwordToggler {
-    padding: 3px 4px;
-    cursor: pointer;
-  }
-  </style>
+  <!-- CSS Files -->
+  <asset:stylesheet id="pagestyle" href="material-dashboard.css" rel="stylesheet" />
 </head>
 
-<body>
-<div id="login">
-  <div class="inner">
-    <div class="fheader"><g:message code='springSecurity.login.header'/></div>
+<body class="bg-gray-200">
+<main class="main-content  mt-0">
 
-    <g:if test='${flash.message}'>
-      <div class="login_message">${flash.message}</div>
-    </g:if>
+  <div class="page-header align-items-start min-vh-100" style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');">
+    <span class="mask bg-gradient-dark opacity-6"></span>
+    <div class="container my-auto">
+      <div class="row">
+        <div class="col-lg-4 col-md-8 col-12 mx-auto">
+          <div class="card z-index-0 fadeIn3 fadeInBottom">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
+              </div>
+            </div>
+            <div class="card-body">
+              <form role="form" class="text-start" action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm">
+                <div class="input-group input-group-outline my-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" name="${usernameParameter ?: 'username'}" id="username" autocapitalize="none">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="form-label">Password</label>
+                  <input type="password" class="form-control" name="${passwordParameter ?: 'password'}" id="password">
+                </div>
+                <div class="form-check form-switch d-flex align-items-center mb-3">
+                  <input class="form-check-input" type="checkbox" name="${rememberMeParameter ?: 'remember-me'}" id="remember_me" <g:if test='${hasCookie}'>checked="checked"</g:if>>
+                  <label class="form-check-label mb-0 ms-3" for="remember_me">Remember me</label>
+                </div>
+                <div class="text-center">
+                  <button type="submit" id="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                </div>
+              </form>
 
-    <form action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm" class="cssform" autocomplete="off">
-      <p>
-        <label for="username"><g:message code='springSecurity.login.username.label'/>:</label>
-        <input type="text" class="text_" name="${usernameParameter ?: 'username'}" id="username" autocapitalize="none"/>
-      </p>
+              <g:if test='${flash.message}'>
+                <div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
+                  <span class="alert-text">${flash.message}</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </g:if>
 
-      <p>
-        <label for="password"><g:message code='springSecurity.login.password.label'/>:</label>
-        <input type="password" class="text_" name="${passwordParameter ?: 'password'}" id="password"/>
-        <i id="passwordToggler" title="toggle password display" onclick="passwordDisplayToggle()">&#128065;</i>
-      </p>
-
-      <p id="remember_me_holder">
-        <input type="checkbox" class="chk" name="${rememberMeParameter ?: 'remember-me'}" id="remember_me" <g:if test='${hasCookie}'>checked="checked"</g:if>/>
-        <label for="remember_me"><g:message code='springSecurity.login.remember.me.label'/></label>
-      </p>
-
-      <p>
-        <input type="submit" id="submit" value="${message(code: 'springSecurity.login.button')}"/>
-      </p>
-    </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer position-absolute bottom-2 py-2 w-100">
+      <div class="container">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-12 col-md-6 my-auto">
+            <div class="copyright text-center text-sm text-white text-lg-start">
+              © <script>
+              document.write(new Date().getFullYear())
+            </script>,
+            made with <i class="fa fa-heart" aria-hidden="true"></i> by
+              <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Creative Tim</a>
+              for a better web.
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
-</div>
+</main>
+<asset:javascript src="core/popper.min.js"/>
+<asset:javascript src="core/bootstrap.min.js"/>
+<asset:javascript src="plugins/perfect-scrollbar.min.js"/>
+<asset:javascript src="plugins/smooth-scrollbar.min.js"/>
+<asset:javascript src="material-dashboard.min.js"/>
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(event) {
     document.forms['loginForm'].elements['username'].focus();
   });
 
-  function passwordDisplayToggle() {
-    var toggleEl = document.getElementById("passwordToggler");
-    var eyeIcon = '\u{1F441}';
-    var xIcon = '\u{2715}';
-    var passEl = document.getElementById("password");
-
-    if (passEl.type === "password") {
-      toggleEl.innerHTML = xIcon;
-      passEl.type = "text";
-    } else {
-      toggleEl.innerHTML = eyeIcon;
-      passEl.type = "password";
-    }
-  }
 </script>
 </body>
+
 </html>
