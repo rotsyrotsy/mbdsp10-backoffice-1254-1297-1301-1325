@@ -6,7 +6,7 @@ import com.itu.mbds.User
 import com.itu.mbds.UserRole
 
 class BootStrap {
-
+/*
     def init = { servletContext ->
 
         // Démarre une transaction programmatique
@@ -29,5 +29,5 @@ class BootStrap {
 
 
         }
-
+*/
 }

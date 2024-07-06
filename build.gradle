@@ -78,6 +78,7 @@ dependencies {
 
     implementation 'org.grails.plugins:spring-security-core:5.3.0'
     implementation "org.grails.plugins:spring-security-rest:3.0.0.RC1"
+    implementation "org.postgresql:postgresql:42.6.2"
 }
 
 bootRun {
