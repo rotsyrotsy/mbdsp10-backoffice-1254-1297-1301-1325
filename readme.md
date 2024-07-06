@@ -2,6 +2,10 @@
 
 Back-Office de la plateforme de troc d'objets entre particuliers. Ce document vous guidera à travers les principales fonctionnalités du projet.
 
+Lien vers la maquette : [Figma Troc Application](https://www.figma.com/design/212f1GBFIjOz2bVIvNZKjM/Troc?node-id=0-1&m=dev)
+
+Lien vers l'API du Front-office : [API Front Troc Application](https://github.com/Junx2001/mbdsp10-api-1325-1301-1297-1254)
+
 ## 📜 Table des Matières
 1. [Introduction](#introduction)
 2. [Fonctionnalités](#fonctionnalités)
