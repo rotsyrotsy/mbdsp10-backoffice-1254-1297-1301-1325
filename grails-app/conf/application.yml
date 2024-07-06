@@ -115,11 +115,11 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: update
+            dbCreate: none
             url: jdbc:postgresql://db-postgresql-nyc1-18909-do-user-16081489-0.db.ondigitalocean.com:25060/troc_tpt
     test:
         dataSource:
-            dbCreate: update
+            dbCreate: none
             url: jdbc:postgresql://db-postgresql-nyc1-18909-do-user-16081489-0.db.ondigitalocean.com:25060/troc_tpt
     production:
         dataSource:
