@@ -69,158 +69,103 @@
               <thead>
               <tr>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ref</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Products Owner</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Products Proposer</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Owner</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proposer</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
-                <th class="text-secondary opacity-7"></th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
               </tr>
               </thead>
               <tbody>
               <tr>
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">John Michael</h6>
-                    </div>
-                  </div>
+                  <span class="text-secondary text-xs font-weight-bold">TRANS123</span>
+                </td>
+                <td class="align-middle text-xs">
+                  <ul>
+                    <li>Matebook X PRo</li>
+                    <li>Souris</li>
+                  </ul>
+                </td>
+                <td class="align-middle text-xs">
+                  <ul>
+                    <li>Clavier</li>
+                    <li>Dell XPS 13 neuf</li>
+                  </ul>
                 </td>
                 <td>
-                  <p class="text-xs font-weight-bold mb-0">Manager</p>
-                  <p class="text-xs text-secondary mb-0">Organization</p>
+                  <span class="text-secondary text-xs font-weight-bold">Owner</span>
+                </td>
+                <td>
+                  <span class="text-secondary text-xs font-weight-bold">Proposer1</span>
                 </td>
                 <td class="align-middle text-center text-sm">
-                  <span class="badge badge-sm bg-gradient-success">Online</span>
+                  <span class="badge badge-sm bg-gradient-warning">Pending</span>
                 </td>
                 <td class="align-middle text-center">
                   <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                 </td>
-                <td class="align-middle">
-                  <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                    Edit
-                  </a>
+              </tr>
+              <tr>
+                <td>
+                  <span class="text-secondary text-xs font-weight-bold">TRANS123</span>
+                </td>
+                <td class="align-middle text-xs">
+                  <ul>
+                    <li>Matebook X PRo</li>
+                    <li>Souris</li>
+                  </ul>
+                </td>
+                <td class="align-middle text-xs">
+                  <ul>
+                    <li>Clavier</li>
+                    <li>Dell XPS 13 neuf</li>
+                  </ul>
+                </td>
+                <td>
+                  <span class="text-secondary text-xs font-weight-bold">Owner</span>
+                </td>
+                <td>
+                  <span class="text-secondary text-xs font-weight-bold">Proposer1</span>
+                </td>
+                <td class="align-middle text-center text-sm">
+                  <span class="badge badge-sm bg-gradient-success">Accepted</span>
+                </td>
+                <td class="align-middle text-center">
+                  <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class="d-flex px-2 py-1">
+                  <span class="text-secondary text-xs font-weight-bold">TRANS123</span>
+                </td>
+                <td class="align-middle text-xs">
+                  <ul>
+                    <li>Matebook X PRo</li>
+                    <li>Souris</li>
+                  </ul>
+                </td>
+                <td class="align-middle text-xs">
+                  <ul>
+                    <li>Clavier</li>
+                    <li>Dell XPS 13 neuf</li>
+                  </ul>
+                </td>
+                <td>
+                  <span class="text-secondary text-xs font-weight-bold">Owner</span>
+                </td>
+                <td>
+                  <span class="text-secondary text-xs font-weight-bold">Proposer1</span>
+                </td>
+                <td class="align-middle text-center text-sm">
+                  <span class="badge badge-sm bg-gradient-danger">Rejected</span>
+                </td>
+                <td class="align-middle text-center">
+                  <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                </td>
+              </tr>
 
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="text-xs font-weight-bold mb-0">Programator</p>
-                  <p class="text-xs text-secondary mb-0">Developer</p>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                </td>
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                </td>
-                <td class="align-middle">
-                  <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                    Edit
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="text-xs font-weight-bold mb-0">Executive</p>
-                  <p class="text-xs text-secondary mb-0">Projects</p>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="badge badge-sm bg-gradient-success">Online</span>
-                </td>
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                </td>
-                <td class="align-middle">
-                  <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                    Edit
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Michael Levi</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="text-xs font-weight-bold mb-0">Programator</p>
-                  <p class="text-xs text-secondary mb-0">Developer</p>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="badge badge-sm bg-gradient-success">Online</span>
-                </td>
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                </td>
-                <td class="align-middle">
-                  <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                    Edit
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Richard Gran</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="text-xs font-weight-bold mb-0">Manager</p>
-                  <p class="text-xs text-secondary mb-0">Executive</p>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                </td>
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                </td>
-                <td class="align-middle">
-                  <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                    Edit
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="text-xs font-weight-bold mb-0">Programator</p>
-                  <p class="text-xs text-secondary mb-0">Developer</p>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                </td>
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                </td>
-                <td class="align-middle">
-                  <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                    Edit
-                  </a>
-                </td>
-              </tr>
               </tbody>
             </table>
           </div>

@@ -51,8 +51,9 @@
                   <thead>
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ref</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">My products</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Proposer</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Products</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proposer products</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Datetime</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                     <th class="text-secondary opacity-7"></th>
@@ -62,6 +63,12 @@
                   <tr>
                     <td>
                       <span class="text-sm ">PO0125</span>
+                    </td>
+                    <td class=" align-middle text-xs">
+                      <ul>
+                        <li>Tapis souris</li>
+                        <li>Dell XPS 13</li>
+                      </ul>
                     </td>
                     <td>
                       <span class="text-xs ">User123</span>
@@ -83,6 +90,12 @@
                     <td>
                       <span class="text-sm ">PO0125</span>
                     </td>
+                    <td class=" align-middle text-xs">
+                      <ul>
+                        <li>Tapis souris</li>
+                        <li>Dell XPS 13</li>
+                      </ul>
+                    </td>
                     <td>
                       <span class="text-xs ">User123</span>
                     </td>
@@ -102,6 +115,12 @@
                   <tr>
                     <td>
                       <span class="text-sm ">PO0125</span>
+                    </td>
+                    <td class=" align-middle text-xs">
+                      <ul>
+                        <li>Tapis souris</li>
+                        <li>Dell XPS 13</li>
+                      </ul>
                     </td>
                     <td>
                       <span class="text-xs ">User123</span>
