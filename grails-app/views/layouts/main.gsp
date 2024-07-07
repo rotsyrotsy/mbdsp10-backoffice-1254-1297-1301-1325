@@ -1,79 +1,180 @@
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>
-        <g:layoutTitle default="Grails"/>
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Troc App</title>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
 
-    <asset:stylesheet src="application.css"/>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+
+    <!-- Nucleo Icons -->
+    <asset:stylesheet href="nucleo-icons.css" rel="stylesheet" />
+    <asset:stylesheet href="nucleo-svg.css" rel="stylesheet" />
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <asset:stylesheet id="pagestyle" href="material-dashboard.css" rel="stylesheet" />
 
     <g:layoutHead/>
 </head>
 
-<body>
+<body class="g-sidenav-show  bg-gray-200">
 
-<nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/#"><asset:image src="grails.svg" alt="Grails Logo"/></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
 
-        <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
-            <ul class="nav navbar-nav ml-auto">
-                <g:pageProperty name="page.nav"/>
-            </ul>
-        </div>
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+            <asset:image src="grails.svg" class="navbar-brand-img h-100" alt="Grails Logo"/>
+            <span class="ms-1 font-weight-bold text-white">TA - Admin Area</span>
+        </a>
     </div>
-    <sec:ifLoggedIn>
-        <g:link controller="logout">Logout</g:link>
-    </sec:ifLoggedIn>
-    <sec:ifNotLoggedIn>
-        <g:link controller="login">Login</g:link>
-    </sec:ifNotLoggedIn>
-</nav>
 
-<g:layoutBody/>
 
-<div class="footer" role="contentinfo">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <a href="http://guides.grails.org" target="_blank">
-                    <asset:image src="advancedgrails.svg" alt="Grails Guides" class="float-left"/>
+    <hr class="horizontal light mt-0 mb-2">
+
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/dashboard">
+
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+
+                    <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
-                <strong class="centered"><a href="http://guides.grails.org" target="_blank">Grails Guides</a></strong>
-                <p>Building your first Grails app? Looking to add security, or create a Single-Page-App? Check out the <a href="http://guides.grails.org" target="_blank">Grails Guides</a> for step-by-step tutorials.</p>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/product">
 
-            </div>
-            <div class="col">
-                <a href="http://docs.grails.org" target="_blank">
-                    <asset:image src="documentation.svg" alt="Grails Documentation" class="float-left"/>
-                </a>
-                <strong class="centered"><a href="http://docs.grails.org" target="_blank">Documentation</a></strong>
-                <p>Ready to dig in? You can find in-depth documentation for all the features of Grails in the <a href="http://docs.grails.org" target="_blank">User Guide</a>.</p>
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">list</i>
+                    </div>
 
-            </div>
-            <div class="col">
-                <a href="https://slack.grails.org" target="_blank">
-                    <asset:image src="slack.svg" alt="Grails Slack" class="float-left"/>
+                    <span class="nav-link-text ms-1">Manage Products</span>
                 </a>
-                <strong class="centered"><a href="https://slack.grails.org" target="_blank">Join the Community</a></strong>
-                <p>Get feedback and share your experience with other Grails developers in the community <a href="https://slack.grails.org" target="_blank">Slack channel</a>.</p>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/transaction">
+
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">sync_alt</i>
+                    </div>
+
+                    <span class="nav-link-text ms-1">Log Transactions</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/user">
+
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">manage_accounts</i>
+                    </div>
+
+                    <span class="nav-link-text ms-1">Manage Users</span>
+                </a>
+            </li>
+
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
+            </li>
+
+            <li class="nav-item">
+                <sec:ifLoggedIn>
+                    <g:link controller="logout" class="nav-link text-white ">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">logout</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Sign Out</span>
+                    </g:link>
+                </sec:ifLoggedIn>
+            </li>
+
+            <li class="nav-item">
+                <sec:ifNotLoggedIn>
+                    <g:link controller="login"  class="nav-link text-white ">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">login</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Sign In</span>
+                    </g:link>
+                </sec:ifNotLoggedIn>
+            </li>
+
+
+        </ul>
+    </div>
+
+
+</aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+        <div class="container-fluid py-1 px-3">
+            <g:pageProperty name="page.breadcrumb"/>
+
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                </div>
+                <ul class="navbar-nav  justify-content-end">
+                    <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                            <div class="sidenav-toggler-inner">
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="/profile" class="nav-link text-body font-weight-bold px-0">
+                            <i class="fa fa-user me-sm-1"></i>
+                            <span class="d-sm-inline d-none">Profile</span>
+                        </a>
+                    </li>
+
+                </ul>
             </div>
         </div>
+    </nav>
+    <div class="container-fluid py-4">
+        <g:layoutBody/>
     </div>
-</div>
+    <footer class="footer py-4  ">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                    <div class="copyright text-center text-sm text-muted text-lg-start">
+                        © <script>
+                        document.write(new Date().getFullYear())
+                    </script>,
+                    made with <i class="fa fa-heart"></i> by
+                        <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                        for a better web.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
 
-<div id="spinner" class="spinner" style="display:none;">
-    <g:message code="spinner.alt" default="Loading&hellip;"/>
-</div>
 
-<asset:javascript src="application.js"/>
-
+<asset:javascript src="core/popper.min.js"/>
+<asset:javascript src="core/bootstrap.min.js"/>
+<asset:javascript src="plugins/perfect-scrollbar.min.js"/>
+<asset:javascript src="plugins/smooth-scrollbar.min.js"/>
+<asset:javascript src="material-dashboard.min.js"/>
 </body>
 </html>

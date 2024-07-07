@@ -1,6 +1,6 @@
 package com.itu.mbds
 
-import grails.plugin.springsecurity.SpringSecurityService
+//import grails.plugin.springsecurity.SpringSecurityService
 import org.grails.datastore.mapping.engine.event.AbstractPersistenceEvent
 import org.grails.datastore.mapping.engine.event.PreInsertEvent
 import org.grails.datastore.mapping.engine.event.PreUpdateEvent
@@ -11,7 +11,7 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class UserPasswordEncoderListener {
 
-    @Autowired
+    /*@Autowired
     SpringSecurityService springSecurityService
 
     @Listener(User)
@@ -35,5 +35,5 @@ class UserPasswordEncoderListener {
 
     private String encodePassword(String password) {
         springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
-    }
+    }*/
 }

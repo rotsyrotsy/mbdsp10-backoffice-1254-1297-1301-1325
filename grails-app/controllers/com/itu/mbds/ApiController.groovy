@@ -2,9 +2,8 @@ package com.itu.mbds
 
 import grails.converters.JSON
 import grails.converters.XML
-import grails.plugin.springsecurity.annotation.Secured
 
-@Secured('ROLE_ADMIN')
+//@Secured('ROLE_ADMIN')
 class ApiController {
 
     UserService userService
