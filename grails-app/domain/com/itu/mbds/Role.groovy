@@ -1,18 +1,26 @@
 package com.itu.mbds
 
+import grails.compiler.GrailsCompileStatic
+import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
 
+@GrailsCompileStatic
+@EqualsAndHashCode(includes='authority')
+@ToString(includes='authority', includeNames=true, includePackage=false)
 class Role {
 	private static final long serialVersionUID = 1
 
-	String role_name
+	String authority
 
 	static hasMany = [users: User]
 
 	static constraints = {
-		role_name nullable: false, blank: false, unique: true
+		authority nullable: false, blank: false, unique: true
 	}
+
 
 	static mapping = {
 		cache true
+		authority column: '`role_name`'
 	}
 }

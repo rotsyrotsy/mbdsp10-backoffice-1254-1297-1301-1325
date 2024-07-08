@@ -18,16 +18,22 @@ class User implements Serializable {
     String address
     boolean enabled=true
     Date dateCreated
+    Date lastUpdated
     Date deleted_at
-    Role role_id
     Date locked_at
+    Role role
+
+    transient  boolean accountExpired
+    transient  boolean accountLocked
+    transient  boolean passwordExpired
+    static transients = ['accountExpired','accountLocked','passwordExpired']
 
     static constraints = {
         password nullable: false, blank: false, password: true
         username nullable: false, blank: false, unique: true
         email nullable: false, blank: false, unique: true, email: true
         enabled nullable: false
-        role_id nullable: false
+        role nullable: false
         user_image nullable: true
         address nullable: true
         deleted_at nullable: true, date: true
@@ -38,6 +44,11 @@ class User implements Serializable {
         table '`user`'
 	    password column: '`password`'
         dateCreated column: 'creation_date'
+        lastUpdated column: 'updated_at'
         enabled column: 'is_active'
+        role column: 'role_id'
+    }
+    Set<Role> getAuthorities() {
+        [role] as Set
     }
 }
