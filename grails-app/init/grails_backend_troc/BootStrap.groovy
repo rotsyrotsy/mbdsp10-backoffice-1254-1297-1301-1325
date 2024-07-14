@@ -1,14 +1,17 @@
 package grails_backend_troc
 
+import com.itu.mbds.Category
+import com.itu.mbds.Product
+import com.itu.mbds.ProductCategory
 import com.itu.mbds.Role
 import com.itu.mbds.User
 
 class BootStrap {
     def init = { servletContext ->
-        //initData()
+        initData()
     }
     void initData(){
-        Role.withTransaction {
+       /* Role.withTransaction {
             ["ROLE_SUPER_ADMIN", "ROLE_ADMIN", "ROLE_USER"].each {
                 String name ->
                     new Role(authority: name).save()
@@ -35,6 +38,71 @@ class BootStrap {
             }
         }
         assert User.count() == 3
-
+        Category.withTransaction{
+            def techCategory = new Category(categoryName: 'Technology').save()
+            def beautyCategory = new Category(categoryName: 'Beauty').save()
+            def officeCategory = new Category(categoryName: 'Office').save()
+        }
+        assert Category.count() == 3
+        Product.withTransaction {
+            def userUser = User.get(6)
+            def product1 = new Product(
+                    description: 'A high-quality smartphone.',
+                    productName: 'Smartphone X',
+                    productImage: 'https://example.com/images/smartphone-x.jpg',
+                    isExchangeable: true,
+                    isDeleted: false,
+                    firstOwner: userUser,
+                    actualOwner: userUser
+            )
+            if (!product1.save(failOnError: true)) {
+                product1.errors.allErrors.each { println it }
+            }
+            def product2 = new Product(
+                    description: 'Latest model of the laptop series.',
+                    productName: 'Laptop Pro',
+                    productImage: 'https://example.com/images/laptop-pro.jpg',
+                    isExchangeable: true,
+                    isDeleted: false,
+                    firstOwner: userUser,
+                    actualOwner: userUser
+            )
+            if (!product2.save(failOnError: true)) {
+                product2.errors.allErrors.each { println it }
+            }
+            def product3 = new Product(
+                    description: 'A comfortable office chair.',
+                    productName: 'Office Chair',
+                    productImage: 'https://example.com/images/office-chair.jpg',
+                    isExchangeable: true,
+                    isDeleted: false,
+                    firstOwner: userUser,
+                    actualOwner: userUser
+            )
+            if (!product3.save(failOnError: true)) {
+                product3.errors.allErrors.each { println it }
+            }
+        }
+        assert Product.count() == 3
+        ProductCategory.withTransaction {
+            def pc1 = ProductCategory.create(Category.findByCategoryName("Technology"), Product.findByProductName("Smartphone X"))
+            if (!pc1.save(failOnError: true)) {
+                pc1.errors.allErrors.each { println it }
+            }
+            def pc2 = ProductCategory.create(Category.findByCategoryName("Technology"), Product.findByProductName("Laptop Pro"))
+            if (!pc2.save(failOnError: true)) {
+                pc2.errors.allErrors.each { println it }
+            }
+            def pc20 = ProductCategory.create(Category.findByCategoryName("Office"), Product.findByProductName("Laptop Pro"))
+            if (!pc20.save(failOnError: true)) {
+                pc20.errors.allErrors.each { println it }
+            }
+            def pc3 = ProductCategory.create(Category.findByCategoryName("Office"), Product.findByProductName("Office Chair"))
+            if (!pc3.save(failOnError: true)) {
+                pc3.errors.allErrors.each { println it }
+            }
+        }
+        assert ProductCategory.count() == 4
+        */
     }
 }

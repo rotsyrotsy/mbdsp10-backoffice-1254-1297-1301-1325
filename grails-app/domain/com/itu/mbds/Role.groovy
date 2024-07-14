@@ -22,5 +22,6 @@ class Role {
 	static mapping = {
 		cache true
 		authority column: '`role_name`'
+		version false
 	}
 }

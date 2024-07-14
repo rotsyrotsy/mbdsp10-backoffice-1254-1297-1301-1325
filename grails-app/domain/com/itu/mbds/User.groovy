@@ -47,8 +47,11 @@ class User implements Serializable {
         lastUpdated column: 'updated_at'
         enabled column: 'is_active'
         role column: 'role_id'
+        version false
     }
     Set<Role> getAuthorities() {
         [role] as Set
     }
+    static hasMany = [ownedProducts: Product, actualProducts: Product, propositions:Proposition]
+    static mappedBy = [ownedProducts: 'firstOwner', actualProducts: 'actualOwner']
 }
