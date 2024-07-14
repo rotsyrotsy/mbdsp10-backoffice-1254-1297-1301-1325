@@ -24,7 +24,13 @@
         <div class="row gx-4 mb-2">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <asset:image src="img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm" />
+
+                    <g:if test="${this.user?.user_image}">
+                        <asset:image src="uploads/${this.user.user_image}" alt="profile_image" class="w-100 border-radius-lg shadow-sm" />
+                    </g:if>
+                    <g:else>
+                        <asset:image src="uploads/default_profile_image.jpg" alt="default_profile_image" class="w-100 border-radius-lg shadow-sm" />
+                    </g:else>
                 </div>
             </div>
             <div class="col-auto my-auto">
@@ -32,9 +38,22 @@
                     <h5 class="mb-1">
                         ${this.user.username}
                     </h5>
-                    <p class="mb-1 font-weight-normal text-sm">
-                        3.5/5
-                    </p>
+                    <g:if test="${this.user.role.authority!="ROLE_USER"}">
+                        <p class="mb-1 font-weight-normal text-sm">
+                            ${this.user.role.authority}
+                        </p>
+                    </g:if>
+                    <g:else>
+                        <p class="mb-1 font-weight-normal text-sm">
+                            3.5/5
+                        </p>
+                    </g:else>
+                    <g:if test="${this.user.accountLocked}">
+                        <p class="mb-1 font-weight-bold text-sm text-danger">Account locked</p>
+                    </g:if>
+                    <g:if test="${this.user.accountExpired}">
+                        <p class="mb-1 font-weight-bold text-sm text-warning">Account expired</p>
+                    </g:if>
                 </div>
             </div>
         </div>
@@ -64,15 +83,17 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 d-flex align-items-center">
-                                    <h6 class="mb-0">Profile Information</h6>
+                                    <h6 class="mb-0">Profile Information </h6>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body p-3">
                             <ul class="list-group">
-                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Reference:</strong> &nbsp; 012345</li>
-                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Username:</strong> &nbsp; John Doe</li>
-                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; johndoe@mail.com</li>
+                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Reference:</strong> &nbsp; ${this.user.id}</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Username:</strong> &nbsp; ${this.user.username}</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; ${this.user.email}</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Address:</strong> &nbsp; ${this.user.address}</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Account created at:</strong> &nbsp; <g:formatDate format="yyyy-MM-dd HH:mm" date="${this.user.dateCreated}"/></li>
 
                             </ul>
                         </div>
