@@ -22,6 +22,7 @@
 
     <!-- CSS Files -->
     <asset:stylesheet id="pagestyle" href="material-dashboard.css" rel="stylesheet" />
+    <asset:stylesheet id="custom" href="style.css" rel="stylesheet" />
 
     <g:layoutHead/>
 </head>

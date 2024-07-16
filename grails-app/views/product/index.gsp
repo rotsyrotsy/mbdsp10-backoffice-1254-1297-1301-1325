@@ -52,40 +52,47 @@
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Current owner</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Propositions</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">First owner</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Is exchangeable</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <asset:image src="img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1"/>
+                            <g:each in="${productList}" var="product">
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                <asset:image src="uploads/${product.productImage}" alt="${product.productName}" class="avatar avatar-sm me-3 border-radius-lg" />
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">${product.productName}</h6>
+                                            </div>
                                         </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">John Michael</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="text-xs font-weight-bold mb-0">Manager</span>
-                                </td>
-                                <td class="align-middle">
-                                    <span class="text-secondary text-xs font-weight-bold ml-2">3</span>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                                </td>
-                                <td class="align-middle">
-                                    <g:link action="show" id="${1}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                        Show
-                                    </g:link>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>
+                                        <span class="text-xs font-weight-bold mb-0">${product.actualOwner.username}</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <span class="text-xs font-weight-bold mb-0">${product.firstOwner.username}</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm ${product.isExchangeable ? "bg-gradient-success" : "bg-gradient-danger"}">${product.isExchangeable ? "TRUE" : "FALSE"}</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <g:link action="show" id="${product.id}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                            Show
+                                        </g:link>
+                                    </td>
+                                </tr>
+                            </g:each>
                             </tbody>
                         </table>
+                        <g:if test="${productCount > params.int('max')}">
+                            <div class="pagination pagination-primary">
+                                <g:paginate total="${productCount ?: 0}"/>
+                            </div>
+                        </g:if>
                     </div>
                 </div>
             </div>
