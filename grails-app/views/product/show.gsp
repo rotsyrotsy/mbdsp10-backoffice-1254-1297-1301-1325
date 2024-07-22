@@ -11,7 +11,7 @@
     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
       <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Home</a></li>
       <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="/Product">Products</a></li>
-      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">1</li>
+      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">${this.product.id}</li>
     </ol>
     <h6 class="font-weight-bolder mb-0">Product</h6>
   </nav>
@@ -21,19 +21,24 @@
     <div class="row gx-4 mb-2">
       <div class="col-auto">
         <div class="avatar avatar-xl position-relative">
-          <asset:image src="img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm" />
+          <asset:image src="uploads/${this.product.productImage}" alt="${this.product.productName}" class="w-100 border-radius-lg shadow-sm" />
         </div>
       </div>
       <div class="col-auto my-auto">
         <div class="h-100">
           <h5 class="mb-1">
-            Huawei  Matebook X PRo
+            ${this.product.productName}
           </h5>
           <p class="mb-1 font-weight-normal text-sm">
-            Current owner : User1235
+            Current owner : ${this.product.actualOwner.username}
           </p>
           <p class="mb-0 font-weight-normal text-sm">
-            <span class="badge badge-sm bg-gradient-success">is exchangeable</span>
+            <g:if test="${this.product.isExchangeable}">
+              <span class="badge badge-sm bg-gradient-success">is exchangeable</span>
+            </g:if>
+            <g:else>
+              <span class="badge badge-sm bg-gradient-danger">not exchangeable</span>
+            </g:else>
           </p>
         </div>
       </div>

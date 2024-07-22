@@ -21,20 +21,20 @@
             <div class="card ">
                 <div class="card-header pb-0">
                     <h6 class="text-capitalize">Product List</h6>
-                    <form role="form">
+                    <g:form action="search"  method="GET" >
                         <div class="row">
                             <div class="col">
                                 <div class="input-group input-group-outline my-3">
-                                    <label class="form-label">Keyword</label>
-                                    <input type="text" class="form-control">
+                                    <g:textField name="keyword"  class="form-control" id="keyword" placeholder="Keyword"
+                                    value="${params.keyword ?: ''}"/>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="input-group input-group-outline my-3">
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option selected>State</option>
-                                        <option>Is exchangeable</option>
-                                        <option>Pending transaction</option>
+                                    <select id="exampleFormControlSelect1" class="form-control" name="isExchangeable">
+                                        <option value="" ${params.isExchangeable == '' || params.isExchangeable == null ? 'selected' : ''}>All</option>
+                                        <option value="true" ${params.isExchangeable == 'true' ? 'selected' : ''}>True</option>
+                                        <option value="false" ${params.isExchangeable == 'false' ? 'selected' : ''}>False</option>
                                     </select>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                 <button class="btn btn-primary my-3" type="submit">Search</button>
                             </div>
                         </div>
-                    </form>
+                    </g:form>
                 </div>
 
                 <div class="card-body px-0 pb-2">
