@@ -17,10 +17,15 @@ class Proposition {
         user column: 'user_id'
         version false
     }
-    static hasMany = [exchanges: Exchange]
+    static hasMany = [ownerExchanges: Exchange]
 
     Set<Product> getProducts(){
         (PropProducts.findAllByProposition(this) as List<PropProducts>)*.product as Set<Product>
+    }
+    Set<Exchange> getAllExchanges() {
+        def ownerExchanges = Exchange.findAllByOwnerProposition(this)
+        def takerExchanges = Exchange.findAllByTakerProposition(this)
+        return (ownerExchanges + takerExchanges) as Set<Exchange>
     }
 }
 

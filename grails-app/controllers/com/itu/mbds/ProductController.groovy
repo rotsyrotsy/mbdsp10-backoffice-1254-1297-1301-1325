@@ -52,7 +52,9 @@ class ProductController {
             notFound()
             return
         }
-        respond product
+        def propositions = product.getPropositions()
+        def exchanges = product.getAllExchanges()
+        respond product, model:[propositionList: propositions, exchangeList:exchanges]
     }
     protected void notFound() {
         request.withFormat {

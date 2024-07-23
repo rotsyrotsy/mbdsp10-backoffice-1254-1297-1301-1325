@@ -132,7 +132,7 @@
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="col-lg-6 col-7">
-                            <h6>Proposition overview</h6>
+                            <h6>Exchanges overview</h6>
                         </div>
                         <div class="col-lg-6 col-5 my-auto text-end">
                             <div class="dropdown float-lg-end pe-4">
@@ -153,36 +153,54 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ref</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">User</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proposer</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ref</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Proposer</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proposer products</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Taker</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Taker products</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Datetime</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                <th class="text-secondary opacity-7"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">PROP123</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <span class="text-secondary text-sm">User</span>
-                                </td>
-                                <td class="align-middle">
-                                    <span class="text-secondary text-sm">Proposer</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                                </td>
-                            </tr>
-
+                            <g:each in="${exchangeList}" var="exchange">
+                                <tr>
+                                    <td class="align-middle text-center">
+                                        <span class="text-sm ">${exchange.id}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-xs ">${exchange.ownerProposition.user.username}</span>
+                                    </td>
+                                    <td class=" align-middle text-xs">
+                                        <ul>
+                                            <g:each in="${exchange.ownerProposition.getProducts()}" var="product">
+                                                <li>${product.productName}</li>
+                                            </g:each>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <span class="text-xs ">${exchange.takerProposition.user.username}</span>
+                                    </td>
+                                    <td class="align-middle text-xs">
+                                        <ul>
+                                            <g:each in="${exchange.takerProposition.getProducts()}" var="product">
+                                                <li>${product.productName}</li>
+                                            </g:each>
+                                        </ul>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs">
+                                            <g:formatDate format="yyyy-MM-dd HH:mm" date="${exchange.creationDate}"/>
+                                        </span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-${exchange.status == 'ACCEPTED' ? 'success' : exchange.status == 'REJECTED' ? 'danger' : 'warning'}">
+                                            ${exchange.status}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </g:each>
                             </tbody>
                         </table>
                     </div>

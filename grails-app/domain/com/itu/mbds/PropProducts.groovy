@@ -20,6 +20,11 @@ class PropProducts {
             proposition == Proposition.load(propositionId) && product == Product.load(ProductId)
         }
     }
+    static PropProducts create(Proposition proposition, Product product, boolean flush = false) {
+        def instance = new PropProducts(proposition: proposition, product: product)
+        instance.save(flush: flush)
+        instance
+    }
     static constraints = {
         proposition nullable: false
         product nullable: false

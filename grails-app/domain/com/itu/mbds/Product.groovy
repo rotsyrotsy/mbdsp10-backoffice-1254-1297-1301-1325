@@ -40,4 +40,11 @@ class Product {
     Set<Category> getCategories(){
         (ProductCategory.findAllByProduct(this) as List<ProductCategory>)*.category as Set<Category>
     }
+    Set<Exchange> getAllExchanges(){
+        Set<Exchange> allExchanges = new HashSet<>()
+        this.propositions.each { proposition ->
+            allExchanges.addAll(proposition.getAllExchanges())
+        }
+        return allExchanges
+    }
 }

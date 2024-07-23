@@ -11,6 +11,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND
 
 class UserController {
     UserService userService
+    PropositionService propositionService
 
     def index(Integer maxRecords) {
         params.maxRecords = Math.min(maxRecords ?: 10, 100)
@@ -68,7 +69,8 @@ class UserController {
             notFound()
             return
         }
-        respond user
+        def propositions = Proposition.findAllByUser(user)
+        respond user, model:[propositionList: propositions]
     }
 
     protected void notFound() {
