@@ -1,8 +1,11 @@
 package grails_backend_troc
 
 import com.itu.mbds.Category
+import com.itu.mbds.Exchange
 import com.itu.mbds.Product
 import com.itu.mbds.ProductCategory
+import com.itu.mbds.PropProducts
+import com.itu.mbds.Proposition
 import com.itu.mbds.Role
 import com.itu.mbds.User
 
@@ -103,6 +106,48 @@ class BootStrap {
             }
         }
         assert ProductCategory.count() == 4
-        */
+
+        Proposition.withTransaction {
+            def proposition = new Proposition(
+                    user: User.get(6)
+            )
+            if (!proposition.save(failOnError: true)) {
+                proposition.errors.allErrors.each { println it }
+            }
+
+            def proposition2 = new Proposition(
+                    user: User.get(18)
+            )
+            if (!proposition2.save(failOnError: true)) {
+                proposition2.errors.allErrors.each { println it }
+            }
+        }
+        assert Proposition.count() == 2
+        PropProducts.withTransaction {
+            def pp1 = PropProducts.create(Proposition.get(19), Product.findByProductName("Laptop Pro"))
+            if (!pp1.save(failOnError: true)) {
+                pp1.errors.allErrors.each { println it }
+            }
+            def pc2 = PropProducts.create(Proposition.get(20), Product.findByProductName("Smartphone X"))
+            if (!pc2.save(failOnError: true)) {
+                pc2.errors.allErrors.each { println it }
+            }
+            def pc3 = PropProducts.create(Proposition.get(20), Product.findByProductName("Office Chair"))
+            if (!pc3.save(failOnError: true)) {
+                pc3.errors.allErrors.each { println it }
+            }
+        }
+        assert PropProducts.count() == 3
+        Exchange.withTransaction {
+            def exchange = new Exchange(
+                status: "PENDING",
+                ownerProposition :Proposition.get(19),
+                takerProposition :Proposition.get(20)
+            )
+            if (!exchange.save(failOnError: true)) {
+                exchange.errors.allErrors.each { println it }
+            }
+        }
+        assert Exchange.count() == 1*/
     }
 }
