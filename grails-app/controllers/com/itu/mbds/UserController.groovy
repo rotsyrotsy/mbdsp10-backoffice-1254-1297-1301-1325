@@ -1,34 +1,54 @@
 package com.itu.mbds
 
+import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
-import static org.springframework.http.HttpStatus.*
+import org.springframework.web.multipart.MultipartFile
+
+import static org.springframework.http.HttpStatus.CREATED
+import static org.springframework.http.HttpStatus.NOT_FOUND
+
+@Secured(['ROLE_ADMIN','ROLE_USER','ROLE_SUPER_ADMIN'])
 
 class UserController {
-
     UserService userService
+    PropositionService propositionService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index(Integer maxRecords) {
+        params.maxRecords = Math.min(maxRecords ?: 10, 100)
+        params.sort = "dateCreated"
+        params.order = "desc"
         respond userService.list(params), model:[userCount: userService.count()]
     }
-
-    def show(Long id) {
-        respond userService.get(id)
-    }
-
     def create() {
-        respond new User(params)
+        respond new User(params), model:[roles:Role.list()]
     }
-
     def save(User user) {
         if (user == null) {
             notFound()
             return
         }
-
         try {
+            // Getting the file from the form
+            MultipartFile f = request.getFile('image')
+            if (f != null && !f.empty) {
+                // Define the target directory and filename
+                String originalFilename = "${new Date().getTime()}_${f.originalFilename}"
+                // Get the path of illustration - path inside application.groovy
+                String mainPath = grailsApplication.config.illustrations.path
+                File targetDir = new File(mainPath)
+                // Create the directory if it does not exist
+                if (!targetDir.exists()) {
+                    targetDir.mkdirs()
+                }
+                // Define the target file
+                File targetFile = new File(targetDir, originalFilename)
+                // Transfer the file to the target location
+                f.transferTo(targetFile)
+
+                // Affect user image to the name of the file
+                user.user_image = originalFilename
+            }
+            user.role = Role.get(params.role)
             userService.save(user)
         } catch (ValidationException e) {
             respond user.errors, view:'create'
@@ -38,53 +58,19 @@ class UserController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                redirect method:"GET", action: "show", id: user.id
             }
-            '*' { respond user, [status: CREATED] }
+            '*' { respond method:"GET", action: "show", id: user.id, [status: CREATED] }
         }
     }
-
-    def edit(Long id) {
-        respond userService.get(id)
-    }
-
-    def update(User user) {
+    def show(Long id) {
+        def user = userService.get(id)
         if (user == null) {
             notFound()
             return
         }
-
-        try {
-            userService.save(user)
-        } catch (ValidationException e) {
-            respond user.errors, view:'edit'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
-            }
-            '*'{ respond user, [status: OK] }
-        }
-    }
-
-    def delete(Long id) {
-        if (id == null) {
-            notFound()
-            return
-        }
-
-        userService.delete(id)
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+        def propositions = Proposition.findAllByUser(user)
+        respond user, model:[propositionList: propositions]
     }
 
     protected void notFound() {

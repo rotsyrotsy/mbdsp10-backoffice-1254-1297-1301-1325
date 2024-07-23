@@ -115,7 +115,7 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: none
+            dbCreate: update
             url:
     test:
         dataSource:

@@ -24,7 +24,13 @@
         <div class="row gx-4 mb-2">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <asset:image src="img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm" />
+
+                    <g:if test="${this.user?.user_image}">
+                        <asset:image src="uploads/${this.user.user_image}" alt="profile_image" class="w-100 border-radius-lg shadow-sm" />
+                    </g:if>
+                    <g:else>
+                        <asset:image src="uploads/default_profile_image.jpg" alt="default_profile_image" class="w-100 border-radius-lg shadow-sm" />
+                    </g:else>
                 </div>
             </div>
             <div class="col-auto my-auto">
@@ -32,9 +38,22 @@
                     <h5 class="mb-1">
                         ${this.user.username}
                     </h5>
-                    <p class="mb-1 font-weight-normal text-sm">
-                        3.5/5
-                    </p>
+                    <g:if test="${this.user.role.authority!="ROLE_USER"}">
+                        <p class="mb-1 font-weight-normal text-sm">
+                            ${this.user.role.authority}
+                        </p>
+                    </g:if>
+                    <g:else>
+                        <p class="mb-1 font-weight-normal text-sm">
+                            3.5/5
+                        </p>
+                    </g:else>
+                    <g:if test="${this.user.accountLocked}">
+                        <p class="mb-1 font-weight-bold text-sm text-danger">Account locked</p>
+                    </g:if>
+                    <g:if test="${this.user.accountExpired}">
+                        <p class="mb-1 font-weight-bold text-sm text-warning">Account expired</p>
+                    </g:if>
                 </div>
             </div>
         </div>
@@ -64,15 +83,17 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 d-flex align-items-center">
-                                    <h6 class="mb-0">Profile Information</h6>
+                                    <h6 class="mb-0">Profile Information </h6>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body p-3">
                             <ul class="list-group">
-                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Reference:</strong> &nbsp; 012345</li>
-                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Username:</strong> &nbsp; John Doe</li>
-                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; johndoe@mail.com</li>
+                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Reference:</strong> &nbsp; ${this.user.id}</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Username:</strong> &nbsp; ${this.user.username}</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; ${this.user.email}</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Address:</strong> &nbsp; ${this.user.address}</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Account created at:</strong> &nbsp; <g:formatDate format="yyyy-MM-dd HH:mm" date="${this.user.dateCreated}"/></li>
 
                             </ul>
                         </div>
@@ -144,7 +165,7 @@
                 <div class="col-8">
                     <div class="card card-plain h-100">
                         <div class="card-header pb-0 p-3">
-                            <h6 class="mb-0">Trade Proposals</h6>
+                            <h6 class="mb-0">User Proposals</h6>
                         </div>
                         <div class="card-body p-3">
                             <div class="table-responsive p-0">
@@ -152,7 +173,6 @@
                                     <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ref</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Proposer</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Products</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Datetime</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
@@ -160,66 +180,33 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <span class="text-sm ">PO0125</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-xs ">User123</span>
-                                        </td>
-                                        <td class="align-middle text-xs">
-                                            <ul>
-                                                <li>Tapis souris</li>
-                                                <li>Dell XPS 13</li>
-                                            </ul>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs">23/04/18 07:15AM</span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-danger">Rejected</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="text-sm ">PO0125</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-xs ">User123</span>
-                                        </td>
-                                        <td class="align-middle text-xs">
-                                            <ul>
-                                                <li>Tapis souris</li>
-                                                <li>Dell XPS 13</li>
-                                            </ul>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs">23/04/18 07:15AM</span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Accepted</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="text-sm ">PO0125</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-xs ">User123</span>
-                                        </td>
-                                        <td class="align-middle text-xs">
-                                            <ul>
-                                                <li>Tapis souris</li>
-                                                <li>Dell XPS 13</li>
-                                            </ul>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs">23/04/18 07:15AM</span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-warning">Pending transaction</span>
-                                        </td>
-                                    </tr>
+                                    <g:each in="${propositionList}" var="proposition">
+                                        <tr>
+                                            <td>
+                                                <span class="text-sm ">${proposition.id}</span>
+                                            </td>
+                                            <td class="align-middle text-xs">
+                                                <ul>
+                                                    <g:each in="${proposition.getProducts()}" var="product">
+                                                        <li>${product.productName}</li>
+                                                    </g:each>
+                                                </ul>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-xs">
+                                                    <g:formatDate format="yyyy-MM-dd HH:mm" date="${proposition.creationDate}"/>
+                                                </span>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <g:if test="${proposition.getAllExchanges().size() > 0}">
+                                                    <span class="badge badge-sm bg-gradient-warning">Pending in exchange</span>
+                                                </g:if>
+                                                <g:else>
+                                                    <span class="badge badge-sm bg-gradient-success">Available</span>
+                                                </g:else>
+                                            </td>
+                                        </tr>
+                                    </g:each>
                                     </tbody>
                                 </table>
                             </div>

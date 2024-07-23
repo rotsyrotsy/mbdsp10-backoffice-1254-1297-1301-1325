@@ -36,8 +36,8 @@
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Username</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Last update</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Products</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rating</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                             </thead>
@@ -55,15 +55,14 @@
                                         </div>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">${user.dateCreated}</span>
+                                        <span class="text-secondary text-xs font-weight-bold">${user.actualProducts.size()}</span>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">${user.lastUpdated}</span>
+                                        <span class="text-secondary text-xs font-weight-bold">0/5</span>
                                     </td>
                                     <td class="align-middle">
                                         <div class="d-flex gap-3">
                                             <div>
-
                                                 <g:link action="show" id="${user.id}" class="text-primary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Show user">
                                                     Show
                                                 </g:link>
