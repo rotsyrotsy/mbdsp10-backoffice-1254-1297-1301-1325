@@ -96,6 +96,10 @@ grails:
                 scriptlet: html
                 taglib: none
                 staticparts: none
+    mongodb:
+        host: "localhost"
+        port: 27017
+        databaseName: "troc_tpt_mongo"
 
 ---
 hibernate:

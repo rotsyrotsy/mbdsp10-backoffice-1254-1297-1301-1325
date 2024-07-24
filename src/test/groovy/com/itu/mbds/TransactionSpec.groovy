@@ -1,9 +1,10 @@
 package com.itu.mbds
 
-import grails.testing.web.controllers.ControllerUnitTest
+
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class TransactionControllerSpec extends Specification implements ControllerUnitTest<TransactionController> {
+class TransactionSpec extends Specification implements DomainUnitTest<Transaction> {
 
     def setup() {
     }
