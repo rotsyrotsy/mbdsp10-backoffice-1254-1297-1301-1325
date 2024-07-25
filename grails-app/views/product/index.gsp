@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Dashboard</title>
+    <title>Product</title>
     <asset:stylesheet href="style.css"/>
 </head>
 <body>

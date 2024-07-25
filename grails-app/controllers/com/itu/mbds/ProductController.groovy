@@ -1,7 +1,7 @@
 package com.itu.mbds
 
 import grails.plugin.springsecurity.annotation.Secured
-//import org.hibernate.criterion.CriteriaSpecification
+import org.hibernate.criterion.CriteriaSpecification
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 
@@ -23,8 +23,8 @@ class ProductController {
         def searchParams = params
         def criteria = Product.createCriteria()
         def results = criteria.list {
-            //createAlias('actualOwner', 'ao', CriteriaSpecification.INNER_JOIN)
-            //createAlias('firstOwner', 'fo', CriteriaSpecification.INNER_JOIN)
+            createAlias('actualOwner', 'ao', CriteriaSpecification.INNER_JOIN)
+            createAlias('firstOwner', 'fo', CriteriaSpecification.INNER_JOIN)
 
             if (searchParams.keyword) {
                 or {
@@ -54,7 +54,8 @@ class ProductController {
         }
         def propositions = product.getPropositions()
         def exchanges = product.getAllExchanges()
-        respond product, model:[propositionList: propositions, exchangeList:exchanges]
+        def transactions = product.getAllTransactions()
+        respond product, model:[propositionList: propositions, exchangeList:exchanges,transactionList:transactions]
     }
     protected void notFound() {
         request.withFormat {

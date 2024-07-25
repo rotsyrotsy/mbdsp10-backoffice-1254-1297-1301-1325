@@ -149,5 +149,31 @@ class BootStrap {
             }
         }
         assert Exchange.count() == 1*/
+
+        /*Proposition.withTransaction {
+            def proposition = new Proposition(
+                    user: User.get(28)
+            )
+            if (!proposition.save(failOnError: true)) {
+                proposition.errors.allErrors.each { println it }
+            }
+        }
+        PropProducts.withTransaction {
+            def pc3 = PropProducts.create(Proposition.get(31), Product.findByProductName("Office Chair"))
+            if (!pc3.save(failOnError: true)) {
+                pc3.errors.allErrors.each { println it }
+            }
+        }
+        Exchange.withTransaction {
+            def exchange = new Exchange(
+                    status: "PENDING",
+                    ownerProposition :Proposition.get(19),
+                    takerProposition :Proposition.get(31),
+                    deliveryAddress: "Tsiadana"
+            )
+            if (!exchange.save(failOnError: true)) {
+                exchange.errors.allErrors.each { println it }
+            }
+        }*/
     }
 }

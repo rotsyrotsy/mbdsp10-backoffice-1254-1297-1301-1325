@@ -47,4 +47,12 @@ class Product {
         }
         return allExchanges
     }
+    List<Transaction> getAllTransactions(){
+        List<Transaction> allTransactions = new ArrayList<>()
+        this.allExchanges.each { exchange ->
+            def exchanges = Transaction.findAllByExchange_id(exchange.id)
+            allTransactions.addAll(exchanges)
+        }
+        return allTransactions
+    }
 }

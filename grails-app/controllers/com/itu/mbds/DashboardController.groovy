@@ -12,7 +12,9 @@ class DashboardController {
         params.sort = "creationDate"
         params.order = "desc"
         def exchangeList = exchangeService.list(params)
+        params.sort = "creation_date"
         def transactionList = transactionService.list(params)
+
         respond exchangeList,model:[transactionList: transactionList]
     }
 }

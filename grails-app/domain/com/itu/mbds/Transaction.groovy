@@ -32,15 +32,19 @@ class Transaction implements MongoEntity<Transaction> {
     private Date parseDate(String dateStr) {
         try {
             def format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") // Adjust the format as needed
-            def dd = format.parse(dateStr)
-            return dd
+            return format.parse(dateStr)
         } catch (ParseException e) {
             return null
         }
     }
-    private String formatDate(Date date) {
-        def format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") // Adjust the format as needed
-        return format.format(date)
+
+    private String formatDate(String date) {
+        def inputFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        inputFormatter.setTimeZone(TimeZone.getTimeZone("UTC"))
+        def parsedDate = inputFormatter.parse(date)
+        def outputFormatter = new SimpleDateFormat("MMM dd yyyy")
+        def formattedDate = outputFormatter.format(parsedDate)
+        return formattedDate
     }
     Exchange getExchange(){
         return Exchange.get(this.exchange_id)
@@ -51,10 +55,13 @@ class Transaction implements MongoEntity<Transaction> {
     User getTaker(){
         return User.get(this.taker_id)
     }
-    Date getCreationDateM() {
-        return parseDate(creation_date)
+    String getFormattedCreationDate() {
+        return formatDate(creation_date)
     }
-    Date getMUpdatedDate() {
+    Date getCreationDate() {
+        return creation_date? parseDate(creation_date): null
+    }
+    Date getUpdatedDate() {
         return updated_date ? parseDate(updated_date) : null
     }
 

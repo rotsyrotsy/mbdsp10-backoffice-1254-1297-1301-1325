@@ -6,7 +6,7 @@ class Exchange {
     Date updatingDate = new Date()
     Proposition ownerProposition
     Proposition takerProposition
-    String delivery_address
+    String deliveryAddress
 
     static constraints = {
         status nullable: false, blank: false
@@ -14,13 +14,14 @@ class Exchange {
         takerProposition nullable: false, blank:false
         creationDate nullable: false,date: true, default: new Date()
         updatingDate nullable: false,date:true, default: new Date()
-        delivery_address nullable: false, blank: false
+        deliveryAddress nullable: true
     }
     static mapping = {
         creationDate column: 'creation_date'
         updatingDate column: 'updated_date'
         ownerProposition column: 'owner_proposition_id'
         takerProposition column: 'taker_proposition_id'
+        deliveryAddress column: 'delivery_address'
         version false
     }
 
