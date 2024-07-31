@@ -25,7 +25,7 @@
             <div class="row">
               <div class="col">
                 <div class="input-group input-group-outline my-3">
-                  <g:textField name="keyword"  class="form-control" id="keyword" placeholder="Keyword"
+                  <g:textField name="keyword"  class="form-control" id="keyword" placeholder="Username"
                                value="${params.keyword ?: ''}"/>
                 </div>
               </div>
@@ -57,10 +57,12 @@
             </div>
           </g:form>
           <div >
-            <button class="btn btn-icon btn-3 btn-info" type="button">
+          <g:form action="exportCsv"  method="POST" >
+            <button class="btn btn-icon btn-3 btn-info" type="submit">
               <span class="btn-inner--icon"><i class="material-icons">download</i></span>
               <span class="btn-inner--text">Export CSV</span>
             </button>
+          </g:form>
           </div>
         </div>
 
@@ -80,10 +82,10 @@
               </tr>
               </thead>
               <tbody>
-              <g:each in="${transactionList}" var="transaction" status="i">
+              <g:each in="${transactionList}" var="transaction" >
                 <tr>
                   <td class="align-middle text-center">
-                    <span class="text-sm ">${i+1}</span>
+                    <span class="text-sm "></span>
                   </td>
                   <td>
                     <span class="text-xs ">${transaction.exchange.ownerProposition.user.username}</span>
