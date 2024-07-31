@@ -56,7 +56,7 @@
                                         </div>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">0/5</span>
+                                        <span class="text-secondary text-xs font-weight-bold">${user?.averageRating}/5</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <g:if test="user.enabled==false">

@@ -3,21 +3,16 @@ package com.itu.mbds
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.multipart.MultipartFile
 
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
-import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.OK
 
 @Secured(['ROLE_ADMIN','ROLE_USER','ROLE_SUPER_ADMIN'])
 
 class UserController {
     UserService userService
-    PropositionService propositionService
-    TransactionService transactionService
     SpringSecurityService springSecurityService
 
     def index(Integer maxRecords) {
@@ -77,8 +72,10 @@ class UserController {
             return
         }
         def propositions = Proposition.findAllByUser(user,[sort: "creationDate", order: "desc"])
-        def transactionList = Transaction.findAllByOwner_idOrTaker_id(user.id,user.id,[sort: "creation_date", order: "desc"])
-        respond user, model:[propositionList: propositions, transactionList: transactionList]
+        def transactionList = Transaction.findAllByOwner_idOrTaker_id(user.id as int, user.id as int,[sort: "creation_date", order: "desc"])
+        def ratingList = Rating.findAllByConcerned_id(user.id as int)
+
+        respond user, model:[propositionList: propositions, transactionList: transactionList, ratingList :ratingList]
     }
 
     protected void notFound() {

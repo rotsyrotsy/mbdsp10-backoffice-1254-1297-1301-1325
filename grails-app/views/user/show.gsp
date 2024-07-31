@@ -45,7 +45,7 @@
                     </g:if>
                     <g:else>
                         <p class="mb-1 font-weight-normal text-sm">
-                            3.5/5
+                            ${this.user.averageRating}/5
                         </p>
                     </g:else>
                     <g:if test="${this.user.locked_at}">
@@ -130,10 +130,10 @@
                         <div class="card-header pb-0 p-3">
                             <h6 class="mb-0">Rating</h6>
                             <p class="text-sm">
-                                <span class="font-weight-bold">Average:</span> &nbsp; 3/5
+                                <span class="font-weight-bold">Average:</span> &nbsp; ${this.user.averageRating}/5
                             </p>
                             <p class="text-sm">
-                                <span class="font-weight-bold">Total votes:</span> &nbsp; 5
+                                <span class="font-weight-bold">Total votes:</span> &nbsp; ${ratingList.size()}
                             </p>
                         </div>
                         <div class="card-body p-3">
@@ -146,38 +146,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <span class="text-xs ">User123</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-xs text-secondary ">3/5</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="text-xs ">User123</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-xs text-secondary ">3/5</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="text-xs ">User123</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-xs text-secondary ">3/5</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="text-xs ">User123</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-xs text-secondary ">3/5</span>
-                                        </td>
-                                    </tr>
+                                    <g:each in="${ratingList}" var="rating">
+                                        <tr>
+                                            <td>
+                                                <span class="text-xs ">${rating.user.username}</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-xs text-secondary ">${rating.stars}/5</span>
+                                            </td>
+                                        </tr>
+                                    </g:each>
                                     </tbody>
                                 </table>
                             </div>
