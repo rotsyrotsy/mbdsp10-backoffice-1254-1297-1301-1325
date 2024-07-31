@@ -48,11 +48,11 @@
                             3.5/5
                         </p>
                     </g:else>
-                    <g:if test="${this.user.accountLocked}">
-                        <p class="mb-1 font-weight-bold text-sm text-danger">Account locked</p>
+                    <g:if test="${this.user.locked_at}">
+                        <p class="mb-1 font-weight-bold text-sm text-warning">Account locked</p>
                     </g:if>
-                    <g:if test="${this.user.accountExpired}">
-                        <p class="mb-1 font-weight-bold text-sm text-warning">Account expired</p>
+                    <g:if test="${this.user.deleted_at}">
+                        <p class="mb-1 font-weight-bold text-sm text-danger">Banned</p>
                     </g:if>
                 </div>
             </div>
@@ -65,16 +65,40 @@
                             <h6 class="mb-0">Account Moderation</h6>
                         </div>
                         <div class="card-body p-3">
-                            <div>
-                                <a href="javascript:;" class="text-warning font-weight-bold text-sm" data-toggle="tooltip" data-original-title="Suspend user">
-                                    Suspend Account
-                                </a>
-                            </div>
-                            <div>
-                                <a href="javascript:;" class="text-danger font-weight-bold text-sm" data-toggle="tooltip" data-original-title="Ban user">
-                                    Ban Account
-                                </a>
-                            </div>
+                        <g:if test="${this.user.deleted_at}">
+                            <p class="mb-1 font-weight-bold text-sm text-danger">User banned at <g:formatDate format="yyyy-MM-dd HH:mm" date="${this.user.deleted_at}"/></p>
+                        </g:if>
+                        <g:else>
+                            <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_SUPER_ADMIN">
+                                <g:form controller="user" action ="moderateAccount" method="PUT" id="${user.id}">
+                                    <div>
+                                        <g:if test="${this.user.locked_at}">
+                                            <input type="hidden" value="unlock" name="moderateAction"/>
+                                            <button class="btn btn-link text-success font-weight-bold text-xs" type="submit" onclick="return confirm('Are you sure?');">
+                                                Unlock Account
+                                            </button>
+                                        </g:if>
+                                        <g:else>
+                                            <input type="hidden" value="lock" name="moderateAction"/>
+                                            <button class="btn btn-link text-warning font-weight-bold text-xs" type="submit" onclick="return confirm('Are you sure?');">
+                                                Lock Account
+                                            </button>
+                                        </g:else>
+                                    </div>
+                                </g:form>
+                                <g:form controller="user" action ="moderateAccount" method="PUT" id="${user.id}">
+                                    <div>
+                                        <input type="hidden" value="ban" name="moderateAction"/>
+                                        <button class="btn btn-link text-danger font-weight-bold text-xs" type="submit" onclick="return confirm('Are you sure?');">
+                                            Ban
+                                        </button>
+                                    </div>
+                                </g:form>
+                            </sec:ifAnyGranted>
+                        </g:else>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -94,7 +118,9 @@
                                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; ${this.user.email}</li>
                                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Address:</strong> &nbsp; ${this.user.address}</li>
                                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Account created at:</strong> &nbsp; <g:formatDate format="yyyy-MM-dd HH:mm" date="${this.user.dateCreated}"/></li>
-
+                                <g:if test="${this.user.locked_at}">
+                                    <li class="list-group-item border-0 ps-0 text-sm text-danger">Account locked at:&nbsp; <g:formatDate format="yyyy-MM-dd HH:mm" date="${this.user.locked_at}"/></li>
+                                </g:if>
                             </ul>
                         </div>
                     </div>

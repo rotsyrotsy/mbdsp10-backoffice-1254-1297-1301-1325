@@ -36,8 +36,9 @@
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Username</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Products</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rating</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Locked at</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Banned at</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                             </thead>
@@ -55,28 +56,64 @@
                                         </div>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">${user.actualProducts.size()}</span>
+                                        <span class="text-secondary text-xs font-weight-bold">0/5</span>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">0/5</span>
+                                        <g:if test="user.enabled==false">
+                                            <span class="text-secondary text-xs font-weight-bold">
+                                                <g:if test="user.locked_at">
+                                                    <g:formatDate format="yyyy-MM-dd" date="${user.locked_at}"/>
+                                                </g:if>
+                                            </span>
+                                        </g:if>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <g:if test="user.enabled==false">
+                                            <span class="text-secondary text-xs font-weight-bold">
+                                                <g:if test="user.deleted_at">
+                                                    <g:formatDate format="yyyy-MM-dd" date="${user.deleted_at}"/>
+                                                </g:if>
+                                            </span>
+                                        </g:if>
                                     </td>
                                     <td class="align-middle">
                                         <div class="d-flex gap-3">
                                             <div>
-                                                <g:link action="show" id="${user.id}" class="text-primary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Show user">
+                                                <g:link action="show" id="${user.id}" class="btn btn-link text-primary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Show user">
                                                     Show
                                                 </g:link>
                                             </div>
-                                            <div>
-                                                <a href="javascript:;" class="text-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Suspend user">
-                                                    Suspend Account
-                                                </a>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:;" class="text-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Ban user">
-                                                    Ban
-                                                </a>
-                                            </div>
+                                            <g:if test="${!user.deleted_at}">
+                                                <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_SUPER_ADMIN">
+                                                    <g:form controller="user" action ="moderateAccount" method="PUT" id="${user.id}">
+                                                        <div>
+                                                            <g:if test="${user.locked_at}">
+                                                                <input type="hidden" value="unlock" name="moderateAction"/>
+                                                                <button class="btn btn-link text-success font-weight-bold text-xs" type="submit" onclick="return confirm('Are you sure?');">
+                                                                    Unlock Account
+                                                                </button>
+                                                            </g:if>
+                                                            <g:else>
+                                                                <input type="hidden" value="lock" name="moderateAction"/>
+                                                                <button class="btn btn-link text-warning font-weight-bold text-xs" type="submit" onclick="return confirm('Are you sure?');">
+                                                                    Lock Account
+                                                                </button>
+                                                            </g:else>
+                                                        </div>
+                                                    </g:form>
+                                                </sec:ifAnyGranted>
+
+                                                <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_SUPER_ADMIN">
+                                                    <g:form controller="user" action ="moderateAccount" method="PUT" id="${user.id}">
+                                                        <div>
+                                                            <input type="hidden" value="ban" name="moderateAction"/>
+                                                            <button class="btn btn-link text-danger font-weight-bold text-xs" type="submit" onclick="return confirm('Are you sure?');">
+                                                                Ban
+                                                            </button>
+                                                        </div>
+                                                    </g:form>
+                                                </sec:ifAnyGranted>
+                                            </g:if>
                                         </div>
 
                                     </td>

@@ -54,4 +54,17 @@ class User implements Serializable {
     }
     static hasMany = [ownedProducts: Product, actualProducts: Product, propositions:Proposition]
     static mappedBy = [ownedProducts: 'firstOwner', actualProducts: 'actualOwner']
+
+    User moderateAccount(User user, String action){
+        user.enabled = false
+        if(action=="lock"){
+            user.locked_at = new Date()
+        }else if(action=="ban") {
+            user.deleted_at = new Date()
+        }else if(action=="unlock"){
+            user.enabled = true
+            user.locked_at = null
+        }
+        return user
+    }
 }
