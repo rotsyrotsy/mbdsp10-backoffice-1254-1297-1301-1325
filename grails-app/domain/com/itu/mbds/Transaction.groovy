@@ -12,8 +12,8 @@ class Transaction implements MongoEntity<Transaction> {
     int exchange_id
     int owner_id
     int taker_id
-    String creation_date
-    String updated_date
+    Date creation_date
+    Date updated_date
     String status
 
     static constraints = {
@@ -29,23 +29,6 @@ class Transaction implements MongoEntity<Transaction> {
         id attr: '_id'
         version false
     }
-    private Date parseDate(String dateStr) {
-        try {
-            def format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") // Adjust the format as needed
-            return format.parse(dateStr)
-        } catch (ParseException e) {
-            return null
-        }
-    }
-
-    private String formatDate(String date) {
-        def inputFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        inputFormatter.setTimeZone(TimeZone.getTimeZone("UTC"))
-        def parsedDate = inputFormatter.parse(date)
-        def outputFormatter = new SimpleDateFormat("MMM dd yyyy")
-        def formattedDate = outputFormatter.format(parsedDate)
-        return formattedDate
-    }
     Exchange getExchange(){
         return Exchange.get(this.exchange_id)
     }
@@ -55,14 +38,11 @@ class Transaction implements MongoEntity<Transaction> {
     User getTaker(){
         return User.get(this.taker_id)
     }
-    String getFormattedCreationDate() {
-        return formatDate(creation_date)
-    }
     Date getCreationDate() {
-        return creation_date? parseDate(creation_date): null
+        return creation_date
     }
     Date getUpdatedDate() {
-        return updated_date ? parseDate(updated_date) : null
+        return updated_date
     }
 
 }

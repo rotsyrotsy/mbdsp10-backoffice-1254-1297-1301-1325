@@ -243,7 +243,7 @@
                                                 Transaction between <span class="text-primary">${transaction.owner.username}</span> and <span class="text-primary">${transaction.taker.username}</span> <span class="fst-italic">${transaction.status}</span>
                                             </h6>
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                                                ${transaction.formattedCreationDate}
+                                                <g:formatDate format="yyyy-MM-dd HH:mm" date="${transaction.creationDate}"/>
                                             </p>
                                         </div>
                                     </div>

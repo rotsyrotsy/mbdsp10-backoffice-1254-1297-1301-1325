@@ -109,7 +109,7 @@
                   </td>
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs">
-                      ${transaction.formattedCreationDate}
+                      <g:formatDate format="yyyy-MM-dd HH:mm" date="${transaction.creationDate}"/>
                     </span>
                   </td>
                   <td class="align-middle text-center text-sm">

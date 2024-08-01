@@ -25,7 +25,7 @@
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                        <h4 class="mb-0">2,300</h4>
+                        <h4 class="mb-0">${totalUsers}</h4>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize">Today's Transactions</p>
-                        <h4 class="mb-0">53</h4>
+                        <h4 class="mb-0">${totalTransactions}</h4>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">
@@ -56,6 +56,7 @@
                 </div>
                 <div class="card-body">
                     <h6 class="mb-0 "> Daily Transactions </h6>
+                    <p class="text-sm "> Successful transaction </p>
                     <hr class="dark horizontal">
                 </div>
             </div>
@@ -87,7 +88,7 @@
                                     Transaction between <span class="text-primary">${transaction.owner.username}</span> and <span class="text-primary">${transaction.taker.username}</span> <span class="fst-italic">${transaction.status}</span>
                                 </h6>
                                 <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                                    ${transaction.formattedCreationDate}
+                                    <g:formatDate format="yyyy-MM-dd HH:mm" date="${transaction.creationDate}"/>
                                 </p>
                             </div>
                         </div>
@@ -190,16 +191,22 @@
         </div>
     </div>
 </div>
+<input type="hidden" value="${dailyTransactions}" id="dailyTransactions" />
+
 <asset:javascript src="plugins/chartjs.min.js"/>
 <script>
     var ctx2 = document.getElementById("chart-line").getContext("2d");
+    var dailyTransactionsJson = document.getElementById("dailyTransactions").value;
+    var dailyTransactions = JSON.parse(dailyTransactionsJson)
+    var labels = dailyTransactions.map(item => item._id);
+    var datasets = dailyTransactions.map(item => item.count);
 
     new Chart(ctx2, {
         type: "line",
         data: {
-            labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            labels: labels,
             datasets: [{
-                label: "Mobile apps",
+                label: "Transactions",
                 tension: 0,
                 borderWidth: 0,
                 pointRadius: 5,
@@ -210,7 +217,7 @@
                 borderWidth: 4,
                 backgroundColor: "transparent",
                 fill: true,
-                data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+                data: datasets,
                 maxBarThickness: 6
 
             }],
