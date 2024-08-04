@@ -16,7 +16,7 @@ class TransactionController implements GrailsConfigurationAware {
         params.sort = "creation_date"
         params.order = "desc"
         def transactions = transactionService.list(params)
-        transactions.each { println it.creation_date } // Print each transaction's date
+        //transactions.each { println it.creation_date } // Print each transaction's date
 
         def transactionList = flash.search ? flash.searchResults : transactionService.list(params)
         def transactionCount = flash.search ? flash.searchResults.size() : transactionService.count()

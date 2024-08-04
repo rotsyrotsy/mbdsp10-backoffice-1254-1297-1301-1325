@@ -4,6 +4,13 @@
     <meta name="layout" content="main"/>
     <title>Dashboard</title>
     <asset:stylesheet href="style.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
 </head>
 <body>
 <content tag="breadcrumb">
@@ -180,18 +187,22 @@
     </div>
     <div class="row mt-4">
         <div class="col-12">
-            <div class="card h-100">
-                <div class="card-header pb-0">
-                    <h6>Statistics of bartered product transactions by category and by region on a world map</h6>
+            <div class="card z-index-2  ">
+                <div class="card-body">
+                    <h6 class="mb-0 "> Transaction location </h6>
                 </div>
-                <div class="card-body p-3">
-
+                <div class="card-header p-0 position-relative mb-n4 mx-3 z-index-2 bg-transparent">
+                    <div class="shadow-success border-radius-lg py-3 pe-1 w-100 h-100">
+                        <div id="map"></div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 <input type="hidden" value="${dailyTransactions}" id="dailyTransactions" />
+<input type="hidden" value="${mapTransactions}" id="mapTransactions" />
 
 <asset:javascript src="plugins/chartjs.min.js"/>
 <script>
@@ -280,6 +291,33 @@
                 },
             },
         },
+    });
+</script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    var mapTransactionsJson = document.getElementById("mapTransactions").value;
+    var mapTransactions = JSON.parse(mapTransactionsJson)
+
+    // initialize Leaflet
+    var map = L.map('map').setView({lon: 47.532831, lat: -18.986034}, 5);
+
+    // add the OpenStreetMap tiles
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 50,
+        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+    }).addTo(map);
+
+    // show the scale bar on the lower left corner
+    L.control.scale({imperial: true, metric: true}).addTo(map);
+
+    // count = 1 -> 10
+    mapTransactions.map(item => {
+        var coord = item._id
+        L.circle([coord.latitude, coord.longitude], 10, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5
+        }).addTo(map)
     });
 </script>
 </body>

@@ -15,6 +15,8 @@ class Transaction implements MongoEntity<Transaction> {
     Date creation_date
     Date updated_date
     String status
+    Double latitude
+    Double longitude
 
     static constraints = {
         id nullable: false
@@ -24,6 +26,8 @@ class Transaction implements MongoEntity<Transaction> {
         creation_date nullable: false
         updated_date nullable: false
         status nullable: false
+        latitude nullable: true
+        longitude nullable: true
     }
     static mapping = {
         id attr: '_id'
