@@ -75,13 +75,11 @@
       <div class="container">
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-12 col-md-6 my-auto">
-            <div class="copyright text-center text-sm text-white text-lg-start">
+            <div class="copyright text-center text-sm text-muted text-lg-start">
               © <script>
               document.write(new Date().getFullYear())
             </script>,
-            made with <i class="fa fa-heart" aria-hidden="true"></i> by
-              <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Creative Tim</a>
-              for a better web.
+              <span class="font-weight-bold">MBDS TPT Prom 10</span> 1325, 1254, 1297, 1301.
             </div>
           </div>
         </div>

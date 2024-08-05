@@ -33,7 +33,7 @@
 
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+        <a class="navbar-brand m-0" href="/" target="_blank">
             <asset:image src="grails.svg" class="navbar-brand-img h-100" alt="Grails Logo"/>
             <span class="ms-1 font-weight-bold text-white">TA - Admin Area</span>
         </a>
@@ -45,7 +45,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white " href="/dashboard">
+                <a class="nav-link text-white " href="/">
 
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -160,10 +160,8 @@
                     <div class="copyright text-center text-sm text-muted text-lg-start">
                         © <script>
                         document.write(new Date().getFullYear())
-                    </script>,
-                    made with <i class="fa fa-heart"></i> by
-                        <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                        for a better web.
+                        </script>,
+                        <span class="font-weight-bold">MBDS TPT Prom 10</span> 1325, 1254, 1297, 1301.
                     </div>
                 </div>
             </div>

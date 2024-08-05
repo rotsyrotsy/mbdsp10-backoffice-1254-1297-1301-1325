@@ -8,8 +8,8 @@ grails.plugin.springsecurity.rest.token.storage.jwt.secret = "eyJ0eXAiOiJKV1QiLC
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
-	[pattern: '/index',          access: ['permitAll']],
-	[pattern: '/index.gsp',      access: ['permitAll']],
+	[pattern: '/index',          access: ['ROLE_ADMIN','ROLE_SUPER_ADMIN']],
+	[pattern: '/index.gsp',      access: ['ROLE_ADMIN','ROLE_SUPER_ADMIN']],
 	[pattern: '/shutdown',       access: ['permitAll']],
 	[pattern: '/assets/**',      access: ['permitAll']],
 	[pattern: '/**/js/**',       access: ['permitAll']],

@@ -22,10 +22,12 @@
                 <div class="card-header pb-0">
                     <h6 class="text-capitalize">User List</h6>
 
-                    <g:link action="create" class="btn btn-icon btn-3 btn-info" type="button">
-                        <span class="btn-inner--icon"><i class="material-icons">add</i></span>
-                        <span class="btn-inner--text">Add a new admin user</span>
-                    </g:link>
+                    <sec:ifAnyGranted roles="ROLE_SUPER_ADMIN">
+                        <g:link action="create" class="btn btn-icon btn-3 btn-info" type="button">
+                            <span class="btn-inner--icon"><i class="material-icons">add</i></span>
+                            <span class="btn-inner--text">Add a new admin user</span>
+                        </g:link>
+                    </sec:ifAnyGranted>
 
                 </div>
 
@@ -84,7 +86,7 @@
                                                 </g:link>
                                             </div>
                                             <g:if test="${!user.deleted_at}">
-                                                <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_SUPER_ADMIN">
+                                                <sec:ifAnyGranted roles="ROLE_SUPER_ADMIN">
                                                     <g:form controller="user" action ="moderateAccount" method="PUT" id="${user.id}">
                                                         <div>
                                                             <g:if test="${user.locked_at}">
@@ -101,9 +103,7 @@
                                                             </g:else>
                                                         </div>
                                                     </g:form>
-                                                </sec:ifAnyGranted>
 
-                                                <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_SUPER_ADMIN">
                                                     <g:form controller="user" action ="moderateAccount" method="PUT" id="${user.id}">
                                                         <div>
                                                             <input type="hidden" value="ban" name="moderateAction"/>

@@ -295,8 +295,14 @@
 </script>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script>
-    var mapTransactionsJson = document.getElementById("mapTransactions").value;
+    var mapTransactionsList = document.getElementById("mapTransactions").value;
+    const mapTransactionsJson = mapTransactionsList
+        .replace(/([{\s,])([a-zA-Z0-9_]+)=/g, '$1"$2":') // Add quotes around keys
+        .replace(/=/g, ':') // Replace '=' with ':'
+        .replace(/'/g, '"');
     var mapTransactions = JSON.parse(mapTransactionsJson)
+
+        //[{"_id": {"latitude": -20.295482, "longitude": 44.278044}, "count": 1}, {"_id": {"latitude": -19.86268, "longitude": 47.033619}, "count": 1}, {"_id": {"latitude": -18.944499, "longitude": 47.524682}, "count": 1}, {"_id": {"latitude": -18.915619, "longitude": 47.539369}, "count": 1}, {"_id": {"latitude": -18.91552, "longitude": 47.5394}, "count": 1}]
 
     // initialize Leaflet
     var map = L.map('map').setView({lon: 47.532831, lat: -18.986034}, 5);
@@ -313,7 +319,8 @@
     // count = 1 -> 10
     mapTransactions.map(item => {
         var coord = item._id
-        L.circle([coord.latitude, coord.longitude], 10, {
+        var rayon = item.count*100
+        L.circle([coord.latitude, coord.longitude], rayon, {
             color: 'red',
             fillColor: '#f03',
             fillOpacity: 0.5

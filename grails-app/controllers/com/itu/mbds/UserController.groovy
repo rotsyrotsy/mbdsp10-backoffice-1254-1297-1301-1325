@@ -9,21 +9,23 @@ import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK
 
-@Secured(['ROLE_ADMIN','ROLE_USER','ROLE_SUPER_ADMIN'])
 
 class UserController {
     UserService userService
     SpringSecurityService springSecurityService
 
+    @Secured(['ROLE_ADMIN','ROLE_SUPER_ADMIN'])
     def index(Integer maxRecords) {
         params.maxRecords = Math.min(maxRecords ?: 10, 100)
         params.sort = "dateCreated"
         params.order = "desc"
         respond userService.list(params), model:[userCount: userService.count()]
     }
+    @Secured(['ROLE_SUPER_ADMIN'])
     def create() {
         respond new User(params), model:[roles:Role.list()]
     }
+    @Secured(['ROLE_SUPER_ADMIN'])
     def save(User user) {
         if (user == null) {
             notFound()
@@ -65,6 +67,7 @@ class UserController {
             '*' { respond method:"GET", action: "show", id: user.id, [status: CREATED] }
         }
     }
+    @Secured(['ROLE_ADMIN','ROLE_SUPER_ADMIN'])
     def show(Long id) {
         def user = userService.get(id)
         if (user == null) {
@@ -88,7 +91,7 @@ class UserController {
         }
     }
 
-    @Secured(['ROLE_ADMIN','ROLE_SUPER_ADMIN'])
+    @Secured(['ROLE_SUPER_ADMIN'])
     def moderateAccount(User user) {
         if (user == null) {
             notFound()

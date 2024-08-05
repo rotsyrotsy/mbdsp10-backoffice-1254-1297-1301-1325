@@ -69,7 +69,7 @@
                             <p class="mb-1 font-weight-bold text-sm text-danger">User banned at <g:formatDate format="yyyy-MM-dd HH:mm" date="${this.user.deleted_at}"/></p>
                         </g:if>
                         <g:else>
-                            <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_SUPER_ADMIN">
+                            <sec:ifAnyGranted roles="ROLE_SUPER_ADMIN">
                                 <g:form controller="user" action ="moderateAccount" method="PUT" id="${user.id}">
                                     <div>
                                         <g:if test="${this.user.locked_at}">

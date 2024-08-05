@@ -5,7 +5,7 @@ import org.hibernate.criterion.CriteriaSpecification
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 
-@Secured(['ROLE_ADMIN','ROLE_USER','ROLE_SUPER_ADMIN'])
+@Secured(['ROLE_ADMIN','ROLE_SUPER_ADMIN'])
 class ProductController {
     ProductService productService
 

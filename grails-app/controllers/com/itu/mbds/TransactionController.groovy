@@ -5,7 +5,7 @@ import grails.core.support.GrailsConfigurationAware
 import grails.plugin.springsecurity.annotation.Secured
 import org.hibernate.criterion.CriteriaSpecification
 
-@Secured(['ROLE_ADMIN','ROLE_USER','ROLE_SUPER_ADMIN'])
+@Secured(['ROLE_ADMIN','ROLE_SUPER_ADMIN'])
 
 class TransactionController implements GrailsConfigurationAware {
     String csvMimeType
