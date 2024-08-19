@@ -21,7 +21,7 @@
     <div class="row gx-4 mb-2">
       <div class="col-auto">
         <div class="avatar avatar-xl position-relative">
-          <asset:image src="uploads/${this.product.productImage}" alt="${this.product.productName}" class="w-100 border-radius-lg shadow-sm" />
+          <img src="${this.product.productImage}" alt="${this.product.productName}" class="w-100 border-radius-lg shadow-sm" />
         </div>
       </div>
       <div class="col-auto my-auto">

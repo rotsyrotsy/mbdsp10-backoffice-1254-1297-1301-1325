@@ -12,8 +12,8 @@ class Transaction implements MongoEntity<Transaction> {
     int exchange_id
     int owner_id
     int taker_id
-    Date creation_date
-    Date updated_date
+    Date created_at
+    Date updated_at
     String status
     Double latitude
     Double longitude
@@ -23,13 +23,14 @@ class Transaction implements MongoEntity<Transaction> {
         exchange_id nullable: false
         owner_id nullable: false
         taker_id nullable: false
-        creation_date nullable: false
-        updated_date nullable: false
+        created_at nullable: false
+        updated_at nullable: false
         status nullable: false
         latitude nullable: true
         longitude nullable: true
     }
     static mapping = {
+        table '`Transactions`'
         id attr: '_id'
         version false
     }
@@ -43,10 +44,10 @@ class Transaction implements MongoEntity<Transaction> {
         return User.get(this.taker_id)
     }
     Date getCreationDate() {
-        return creation_date
+        return created_at
     }
     Date getUpdatedDate() {
-        return updated_date
+        return updated_at
     }
 
 }

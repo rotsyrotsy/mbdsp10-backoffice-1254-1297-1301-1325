@@ -11,17 +11,25 @@ class Role {
 	private static final long serialVersionUID = 1
 
 	String authority
+	String name
+	Date createdAt
+	Date updatedAt
 
 	static hasMany = [users: User]
 
 	static constraints = {
 		authority nullable: false, blank: false, unique: true
+		name nullable: false, blank: false, unique: true
 	}
 
 
 	static mapping = {
+		table '`Roles`'
 		cache true
-		authority column: '`role_name`'
+		authority column: '`authority`'
+		name column: '`name`'
+		createdAt column: '`createdAt`'
+		updatedAt column: '`updatedAt`'
 		version false
 	}
 }

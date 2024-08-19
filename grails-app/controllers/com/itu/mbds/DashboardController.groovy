@@ -2,7 +2,6 @@ package com.itu.mbds
 
 import com.mongodb.client.model.Accumulators
 import com.mongodb.client.model.Aggregates
-import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import grails.plugin.springsecurity.annotation.Secured
 import groovy.json.JsonSlurper
@@ -75,7 +74,7 @@ class DashboardController {
                 }
             }
         }
-        def totalUsers = User.countByRole([Role.get(3)])
+        def totalUsers = User.countByRole([Role.get(1)])
         respond exchangeList,model:[transactionList: transactionList,totalUsers:totalUsers, totalExchanges:todayExchanges.size(), dailyTransactions:dailyTransactions, mapTransactions : mapTransactionList]
 
     }

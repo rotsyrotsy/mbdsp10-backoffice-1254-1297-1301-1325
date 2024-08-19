@@ -19,9 +19,9 @@ Ce back-office permet aux super-utilisateurs de gérer les différents aspects d
 - Accès sécurisé pour les utilisateurs ayant des privilèges spéciaux.
 
 ### 👥 Gestion des Rôles
-- **SUPER-ADMIN** : Gestion complète de la plateforme.
-- **ADMIN** : Gestion partielle selon les permissions attribuées.
-- **USER** : Accès limité à certaines fonctionnalités.
+- **ROLE_SUPER_ADMIN** : Gestion complète de la plateforme.
+- **ROLE_ADMIN** : Gestion partielle selon les permissions attribuées.
+- **ROLE_USER** : Accès limité à certaines fonctionnalités.
 
 ### ⭐ Liste des Notations Utilisateurs
 - Visualisation et gestion des évaluations laissées par les utilisateurs.

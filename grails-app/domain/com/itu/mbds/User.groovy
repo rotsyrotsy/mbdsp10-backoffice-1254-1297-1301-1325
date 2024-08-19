@@ -40,13 +40,14 @@ class User implements Serializable {
         locked_at nullable: true, date: true
     }
 
+
     static mapping = {
-        table '`user`'
+        table '`Users`'
 	    password column: '`password`'
-        dateCreated column: 'creation_date'
-        lastUpdated column: 'updated_at'
-        enabled column: 'is_active'
-        role column: 'role_id'
+        dateCreated column: '`createdAt`'
+        lastUpdated column: '`updatedAt`'
+        enabled column: '`is_active`'
+        role column: '`role_id`'
         version false
     }
     Set<Role> getAuthorities() {

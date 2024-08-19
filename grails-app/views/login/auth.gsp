@@ -41,7 +41,7 @@
             <div class="card-body">
               <form role="form" class="text-start" action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm">
                 <div class="input-group input-group-outline my-3">
-                  <label for="username" class="form-label">Username</label>
+                  <label for="username" class="form-label">Email</label>
                   <input type="text" class="form-control" name="${usernameParameter ?: 'username'}" id="username" autocapitalize="none">
                 </div>
                 <div class="input-group input-group-outline mb-3">
