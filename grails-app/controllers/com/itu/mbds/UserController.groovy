@@ -75,10 +75,12 @@ class UserController {
             return
         }
         def propositions = Proposition.findAllByUser(user,[sort: "creationDate", order: "desc"])
+
+        def exchangeList = user.getAllExchanges();
         def transactionList = Transaction.findAllByOwner_idOrTaker_id(user.id as int, user.id as int,[sort: "creation_date", order: "desc"])
         def ratingList = Rating.findAllByConcerned_id(user.id as int)
 
-        respond user, model:[propositionList: propositions, transactionList: transactionList, ratingList :ratingList]
+        respond user, model:[exchangeList: exchangeList, transactionList: transactionList, ratingList :ratingList]
     }
 
     protected void notFound() {

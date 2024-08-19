@@ -10,9 +10,9 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
       <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Home</a></li>
-      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
+      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Exchanges</li>
     </ol>
-    <h6 class="font-weight-bolder mb-0">Transactions</h6>
+    <h6 class="font-weight-bolder mb-0">Exchanges</h6>
   </nav>
 </content>
 <div id="content" role="main">
@@ -20,12 +20,12 @@
     <div class="col-12">
       <div class="card ">
         <div class="card-header pb-0">
-          <h6 class="text-capitalize">Log Transactions</h6>
+          <h6 class="text-capitalize">Exchanges history</h6>
           <g:form action="search"  method="GET" >
             <div class="row">
               <div class="col">
                 <div class="input-group input-group-outline my-3">
-                  <g:textField name="keyword"  class="form-control" id="keyword" placeholder="Username"
+                  <g:textField name="keyword"  class="form-control" id="keyword" placeholder="Keyword"
                                value="${params.keyword ?: ''}"/>
                 </div>
               </div>
@@ -33,22 +33,11 @@
                 <div class="input-group input-group-outline my-3">
                   <select id="exampleFormControlSelect1" class="form-control" name="state">
                     <option value="" ${params.state == '' || params.state == null ? 'selected' : ''}>All</option>
-                    <option value="pending" ${params.state == 'pending' ? 'selected' : ''}>PENDING</option>
-                    <option value="accepted" ${params.state == 'accepted' ? 'selected' : ''}>ACCEPTED</option>
-                    <option value="rejected" ${params.state == 'rejected' ? 'selected' : ''}>REJECTED</option>
+                    <option value="CREATED" ${params.state == 'pending' ? 'selected' : ''}>CREATED</option>
+                    <option value="ACCEPTED" ${params.state == 'accepted' ? 'selected' : ''}>ACCEPTED</option>
+                    <option value="CANCELLED" ${params.state == 'rejected' ? 'selected' : ''}>CANCELLED</option>
+                    <option value="RECEIVED" ${params.state == 'rejected' ? 'selected' : ''}>RECEIVED</option>
                   </select>
-                </div>
-              </div>
-              <div class="col">
-                <div class="input-group input-group-static  mb-3" style="margin-top: -0.5rem !important; ">
-                  <label>Start date</label>
-                  <input name="startDate"  type="datetime-local" class="form-control">
-                </div>
-              </div>
-              <div class="col">
-                <div class="input-group input-group-static mb-3" style="margin-top: -0.5rem !important; ">
-                  <label>End date</label>
-                  <input name="endDate"  type="datetime-local" class="form-control">
                 </div>
               </div>
               <div class="col">
@@ -72,8 +61,8 @@
               <thead>
               <tr>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Proposer</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proposer products</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Owner</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Owner products</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Taker</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Taker products</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Datetime</th>
@@ -82,39 +71,39 @@
               </tr>
               </thead>
               <tbody>
-              <g:each in="${transactionList}" var="transaction" >
+              <g:each in="${exchangeList}" var="exchange" >
                 <tr>
                   <td class="align-middle text-center">
                     <span class="text-sm "></span>
                   </td>
                   <td>
-                    <span class="text-xs ">${transaction.exchange.ownerProposition.user.username}</span>
+                    <span class="text-xs ">${exchange.ownerProposition.user.username}</span>
                   </td>
                   <td class=" align-middle text-xs">
                     <ul>
-                      <g:each in="${transaction.exchange.ownerProposition.getProducts()}" var="product">
+                      <g:each in="${exchange.ownerProposition.getProducts()}" var="product">
                         <li>${product.productName}</li>
                       </g:each>
                     </ul>
                   </td>
                   <td>
-                    <span class="text-xs ">${transaction.exchange.takerProposition.user.username}</span>
+                    <span class="text-xs ">${exchange.takerProposition.user.username}</span>
                   </td>
                   <td class="align-middle text-xs">
                     <ul>
-                      <g:each in="${transaction.exchange.takerProposition.getProducts()}" var="product">
+                      <g:each in="${exchange.takerProposition.getProducts()}" var="product">
                         <li>${product.productName}</li>
                       </g:each>
                     </ul>
                   </td>
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs">
-                      <g:formatDate format="yyyy-MM-dd HH:mm" date="${transaction.creationDate}"/>
+                      <g:formatDate format="yyyy-MM-dd HH:mm" date="${exchange.creationDate}"/>
                     </span>
                   </td>
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-${transaction.status == 'ACCEPTED' ? 'success' : transaction.status == 'REJECTED' ? 'danger' : 'warning'}">
-                      ${transaction.status}
+                    <span class="badge badge-sm bg-gradient-${exchange.status == 'CREATED' ? 'warning' : exchange.status == 'CANCELLED' ? 'danger' : 'success'}">
+                      ${exchange.status}
                     </span>
                   </td>
                 </tr>
@@ -122,9 +111,9 @@
               </tbody>
             </table>
 
-            <g:if test="${transactionCount > params.int('max')}">
+            <g:if test="${exchangeCount > params.int('max')}">
               <div class="pagination pagination-primary">
-                <g:paginate total="${transactionCount ?: 0}"/>
+                <g:paginate total="${exchangeCount ?: 0}"/>
               </div>
             </g:if>
           </div>

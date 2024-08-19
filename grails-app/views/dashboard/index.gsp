@@ -45,8 +45,8 @@
                         <i class="material-icons opacity-10">sync</i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Today's Transactions</p>
-                        <h4 class="mb-0">${totalTransactions}</h4>
+                        <p class="text-sm mb-0 text-capitalize">Today's Exchanges</p>
+                        <h4 class="mb-0">${totalExchanges}</h4>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">
@@ -80,19 +80,11 @@
                     <g:each in="${transactionList}" var="transaction">
                         <div class="timeline-block mb-3">
                             <span class="timeline-step">
-                                <g:if test="${transaction.status == "PENDING"}">
-                                    <i class="material-icons text-warning text-gradient">pending</i>
-                                </g:if>
-                                <g:elseif test="${transaction.status == "ACCEPTED"}">
-                                    <i class="material-icons text-success text-gradient">check_circle</i>
-                                </g:elseif>
-                                <g:else>
-                                    <i class="material-icons text-danger text-gradient">cancel</i>
-                                </g:else>
+                                <i class="material-icons text-success text-gradient">check_circle</i>
                             </span>
                             <div class="timeline-content">
                                 <h6 class="text-dark text-sm font-weight-bold mb-0">
-                                    Transaction between <span class="text-primary">${transaction.owner.username}</span> and <span class="text-primary">${transaction.taker.username}</span> <span class="fst-italic">${transaction.status}</span>
+                                    Transaction between <span class="text-primary">${transaction.owner.username}</span> and <span class="text-primary">${transaction.taker.username}</span>
                                 </h6>
                                 <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
                                     <g:formatDate format="yyyy-MM-dd HH:mm" date="${transaction.creationDate}"/>

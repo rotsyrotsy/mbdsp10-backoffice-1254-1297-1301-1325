@@ -79,4 +79,8 @@ class User implements Serializable {
 
         return avgStars
     }
+    Set<Exchange> getAllExchanges() {
+        Proposition userProposition = Proposition.findByUser(this)
+        return userProposition ? userProposition.getAllExchanges() : null;
+    }
 }
