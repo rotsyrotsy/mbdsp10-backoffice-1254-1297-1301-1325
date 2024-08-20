@@ -2,7 +2,6 @@ package com.itu.mbds
 
 import com.mongodb.client.model.Accumulators
 import com.mongodb.client.model.Aggregates
-import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import grails.plugin.springsecurity.annotation.Secured
 import groovy.json.JsonSlurper
@@ -23,17 +22,17 @@ class DashboardController {
         params.sort = "creation_date"
         def transactionList = transactionService.list(params)
 
-        def criteria = Transaction.createCriteria()
+
+        def criteria = Exchange.createCriteria()
         // Query using GORM criteria
-        def todayTransactions =  criteria.list {
-            between('creation_date', globalService.getStartOfDay(), globalService.getEndOfDay())
-            ne('status', 'PENDING')  // 'ne' for not equal
+        def todayExchanges =  criteria.list {
+            between('creationDate', globalService.getStartOfDay(), globalService.getEndOfDay())
+            //ne('status', 'CREATED')  // 'ne' for not equal
         }
 
         List<Map> dailyTransactions = []
         Transaction.collection.aggregate(
                 Arrays.asList(
-                        Aggregates.match(Filters.eq("status", "ACCEPTED")),
                         // Project creation_date as a formatted date string
                         Aggregates.project(Projections.fields(
                                 Projections.computed("date", new Document("\$dateToString", new Document("format", "%Y-%m-%d").append("date", "\$creation_date"))),
@@ -47,10 +46,10 @@ class DashboardController {
         ).forEach { doc ->
             dailyTransactions << doc.toJson()
         }
+
         List<Map> mapTransactionList = []
         Transaction.collection.aggregate(
                 Arrays.asList(
-                        Aggregates.match(Filters.eq("status", "PENDING")),
                         Aggregates.group(new Document("latitude", "\$latitude").append("longitude", "\$longitude"),
                                 Accumulators.sum("count", 1)),
                         Aggregates.sort(new Document("_id", 1))
@@ -75,9 +74,8 @@ class DashboardController {
                 }
             }
         }
-        def totalUsers = User.countByRole([Role.get(3)])
-        def totalTransactions = todayTransactions.size()
-        respond exchangeList,model:[transactionList: transactionList,totalUsers:totalUsers, totalTransactions:totalTransactions, dailyTransactions:dailyTransactions, mapTransactions : mapTransactionList]
+        def totalUsers = User.countByRole([Role.get(1)])
+        respond exchangeList,model:[transactionList: transactionList,totalUsers:totalUsers, totalExchanges:todayExchanges.size(), dailyTransactions:dailyTransactions, mapTransactions : mapTransactionList]
 
     }
 }

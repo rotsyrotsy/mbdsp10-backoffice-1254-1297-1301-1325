@@ -17,11 +17,12 @@ class Exchange {
         deliveryAddress nullable: true
     }
     static mapping = {
-        creationDate column: 'creation_date'
-        updatingDate column: 'updated_date'
-        ownerProposition column: 'owner_proposition_id'
-        takerProposition column: 'taker_proposition_id'
-        deliveryAddress column: 'delivery_address'
+        table '`Exchanges`'
+        creationDate column: '`createdAt`'
+        updatingDate column: '`updatedAt`'
+        ownerProposition column: '`owner_proposition_id`'
+        takerProposition column: '`taker_proposition_id`'
+        deliveryAddress column: '`delivery_address`'
         version false
     }
 

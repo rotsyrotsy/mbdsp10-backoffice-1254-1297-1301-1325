@@ -14,10 +14,11 @@ class Proposition {
     }
 
     static mapping = {
-        creationDate column: 'creation_date'
-        updatingDate column: 'updated_date'
-        user column: 'user_id'
-        isActive column: 'is_active'
+        table '`Propositions`'
+        creationDate column: '`createdAt`'
+        updatingDate column: '`updatedAt`'
+        user column: '`user_id`'
+        isActive column: '`is_active`'
         version false
     }
     static hasMany = [ownerExchanges: Exchange]

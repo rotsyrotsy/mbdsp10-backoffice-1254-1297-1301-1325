@@ -5,11 +5,15 @@ import grails.gorm.DetachedCriteria
 class PropProducts {
     Proposition proposition
     Product product
+    Date createdAt
+    Date updatedAt
 
     static mapping = {
-        table '`prop_products`'
-        proposition column: 'proposition_id'
-        product column: 'product_id'
+        table '`PropositionProducts`'
+        proposition column: '`proposition_id`'
+        product column: '`product_id`'
+        createdAt column: '`createdAt`'
+        updatedAt column: '`updatedAt`'
         version false
     }
     static boolean exists(long propositionId, long ProductId) {

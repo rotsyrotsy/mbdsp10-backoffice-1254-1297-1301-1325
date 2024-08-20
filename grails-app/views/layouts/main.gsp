@@ -67,13 +67,13 @@
 
 
             <li class="nav-item">
-                <a class="nav-link text-white " href="/transaction">
+                <a class="nav-link text-white " href="/exchange">
 
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">sync_alt</i>
                     </div>
 
-                    <span class="nav-link-text ms-1">Log Transactions</span>
+                    <span class="nav-link-text ms-1">Log Exchanges</span>
                 </a>
             </li>
 
@@ -140,10 +140,7 @@
                         </a>
                     </li>
                     <li class="nav-item d-flex align-items-center">
-                        <a href="/profile" class="nav-link text-body font-weight-bold px-0">
-                            <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Profile</span>
-                        </a>
+
                     </li>
 
                 </ul>

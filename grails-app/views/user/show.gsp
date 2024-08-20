@@ -26,7 +26,7 @@
                 <div class="avatar avatar-xl position-relative">
 
                     <g:if test="${this.user?.user_image}">
-                        <asset:image src="uploads/${this.user.user_image}" alt="profile_image" class="w-100 border-radius-lg shadow-sm" />
+                        <img src="${this.user.user_image}" alt="profile_image" class="w-100 border-radius-lg shadow-sm" />
                     </g:if>
                     <g:else>
                         <asset:image src="uploads/default_profile_image.jpg" alt="default_profile_image" class="w-100 border-radius-lg shadow-sm" />
@@ -169,45 +169,54 @@
                 <div class="col-8">
                     <div class="card card-plain h-100">
                         <div class="card-header pb-0 p-3">
-                            <h6 class="mb-0">User Proposals</h6>
+                            <h6 class="mb-0">Related Exchanges</h6>
                         </div>
                         <div class="card-body p-3">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ref</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Products</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Owner</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Owner products</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Taker</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Taker products</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Datetime</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <g:each in="${propositionList}" var="proposition">
+                                    <g:each in="${exchangeList}" var="exchange">
                                         <tr>
                                             <td>
-                                                <span class="text-sm ">${proposition.id}</span>
+                                                <span class="text-xs ">${exchange.ownerProposition.user.username}</span>
                                             </td>
-                                            <td class="align-middle text-xs">
+                                            <td class="text-xs">
                                                 <ul>
-                                                    <g:each in="${proposition.getProducts()}" var="product">
+                                                    <g:each in="${exchange.ownerProposition.getProducts()}" var="product">
+                                                        <li>${product.productName}</li>
+                                                    </g:each>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <span class="text-xs ">${exchange.takerProposition.user.username}</span>
+                                            </td>
+                                            <td class="text-xs">
+                                                <ul>
+                                                    <g:each in="${exchange.takerProposition.getProducts()}" var="product">
                                                         <li>${product.productName}</li>
                                                     </g:each>
                                                 </ul>
                                             </td>
                                             <td class="align-middle text-center">
                                                 <span class="text-secondary text-xs">
-                                                    <g:formatDate format="yyyy-MM-dd HH:mm" date="${proposition.creationDate}"/>
+                                                    <g:formatDate format="yyyy-MM-dd HH:mm" date="${exchange.creationDate}"/>
                                                 </span>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <g:if test="${proposition.getAllExchanges().size() > 0}">
-                                                    <span class="badge badge-sm bg-gradient-warning">Pending in exchange</span>
-                                                </g:if>
-                                                <g:else>
-                                                    <span class="badge badge-sm bg-gradient-success">Available</span>
-                                                </g:else>
+                                                <span class="badge badge-sm bg-gradient-${exchange.status == 'ACCEPTED' ? 'success' : exchange.status == 'REJECTED' ? 'danger' : 'warning'}">
+                                                    ${exchange.status}
+                                                </span>
                                             </td>
                                         </tr>
                                     </g:each>
@@ -228,19 +237,11 @@
                                 <g:each in="${transactionList}" var="transaction">
                                     <div class="timeline-block mb-3">
                                         <span class="timeline-step">
-                                            <g:if test="${transaction.status == "PENDING"}">
-                                                <i class="material-icons text-warning text-gradient">pending</i>
-                                            </g:if>
-                                            <g:elseif test="${transaction.status == "ACCEPTED"}">
-                                                <i class="material-icons text-success text-gradient">check_circle</i>
-                                            </g:elseif>
-                                            <g:else>
-                                                <i class="material-icons text-danger text-gradient">cancel</i>
-                                            </g:else>
+                                            <i class="material-icons text-success text-gradient">check_circle</i>
                                         </span>
                                         <div class="timeline-content">
                                             <h6 class="text-dark text-sm font-weight-bold mb-0">
-                                                Transaction between <span class="text-primary">${transaction.owner.username}</span> and <span class="text-primary">${transaction.taker.username}</span> <span class="fst-italic">${transaction.status}</span>
+                                                Transaction between <span class="text-primary">${transaction.owner.username}</span> and <span class="text-primary">${transaction.taker.username}</span>
                                             </h6>
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
                                                 <g:formatDate format="yyyy-MM-dd HH:mm" date="${transaction.creationDate}"/>

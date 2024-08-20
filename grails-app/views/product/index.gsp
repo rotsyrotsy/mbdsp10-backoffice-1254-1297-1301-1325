@@ -63,7 +63,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <asset:image src="uploads/${product.productImage}" alt="${product.productName}" class="avatar avatar-sm me-3 border-radius-lg" />
+                                                <img src="${product.productImage}" alt="${product.productName}" class="avatar avatar-sm me-3 border-radius-lg" />
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">${product.productName}</h6>

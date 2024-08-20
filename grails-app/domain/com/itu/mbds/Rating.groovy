@@ -9,51 +9,31 @@ import java.text.SimpleDateFormat
 class Rating implements MongoEntity<Rating> {
     static mapWith = "mongodb"
     ObjectId id
-    int user_id
+    int userId
     int concerned_id
-    String creation_date
     String review
     Double stars
 
     static constraints = {
         id nullable: false
-        user_id nullable: false
+        userId nullable: false
         concerned_id nullable: false
-        creation_date nullable: false
         review nullable: true
         stars nullable: false
     }
     static mapping = {
+        table '`Ratings`'
         id attr: '_id'
         version false
-    }
-    private Date parseDate(String dateStr) {
-        try {
-            def format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") // Adjust the format as needed
-            return format.parse(dateStr)
-        } catch (ParseException e) {
-            return null
-        }
-    }
-
-    private String formatDate(String date) {
-        def inputFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        inputFormatter.setTimeZone(TimeZone.getTimeZone("UTC"))
-        def parsedDate = inputFormatter.parse(date)
-        def outputFormatter = new SimpleDateFormat("MMM dd yyyy")
-        def formattedDate = outputFormatter.format(parsedDate)
-        return formattedDate
+        userId column: '`userId`'
+        concerned_id column: '`concerned_user_id`'
+        review column: '`review`'
+        stars column: '`rating`'
     }
     User getUser(){
-        return User.get(this.user_id)
+        return User.get(this.userId)
     }
     User getConcernedUser(){
         return User.get(this.concerned_id)
-    }
-    String getFormattedCreationDate() {
-        return formatDate(creation_date)
-    }
-    Date getCreationDate() {
-        return creation_date? parseDate(creation_date): null
     }
 }
